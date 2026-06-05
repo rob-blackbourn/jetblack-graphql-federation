@@ -73,3 +73,11 @@ def get_directive_from_name(
             f"@{directive_name} not supported on federation version {federation_version}"
         )
     return directive
+
+
+__all__ = [
+    'LATEST_VERSION',
+    'STABLE_VERSION',
+    'get_directives_based_on_version',
+    'get_directive_from_name'
+]
