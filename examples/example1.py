@@ -1,4 +1,22 @@
-from graphql import build_schema, print_schema
+from graphql import (
+    build_ast_schema,
+    build_schema,
+    parse,
+    print_schema,
+    ArgumentNode,
+    BooleanValueNode,
+    DirectiveNode,
+    DirectiveDefinitionNode,
+    DocumentNode,
+    FieldDefinitionNode,
+    InputValueDefinitionNode,
+    NameNode,
+    NamedTypeNode,
+    NonNullTypeNode,
+    ObjectTypeDefinitionNode,
+    ScalarTypeDefinitionNode,
+    StringValueNode,
+)
 
 
 def main() -> None:
@@ -17,7 +35,120 @@ type Query {
 }
 """
     schema_from_text1 = build_schema(subgraph_text1)
+    ast1 = parse(subgraph_text1)
+    schema1 = build_ast_schema(ast1)
+    print("# Subgraph 1")
+    # for type_ in schema_from_text1.type_map.values():
+    #     if type_.ast_node is not None:
+    #         print(print_ast(type_.ast_node))
     print(print_schema(schema_from_text1))
+
+    subgraph_ast1 = DocumentNode(
+        definitions=(
+            # scalar FieldSet
+            ScalarTypeDefinitionNode(
+                name=NameNode(value='FieldSet'),
+            ),
+            # directive @key(fields: FieldSet!, resolvable: Boolean = true) repeatable on OBJECT | INTERFACE
+            DirectiveDefinitionNode(
+                name=NameNode(value="key"),
+                arguments=(
+                    InputValueDefinitionNode(
+                        name=NameNode(value="fields"),
+                        type=NonNullTypeNode(
+                            type=NamedTypeNode(
+                                name=NameNode(
+                                    value="FieldSet"
+                                )
+
+                            )
+                        )
+                    ),
+                    InputValueDefinitionNode(
+                        name=NameNode(value="resolvable"),
+                        type=NamedTypeNode(
+                            name=NameNode(value='Boolean')
+                        ),
+                        default_value=BooleanValueNode(
+                            value=True
+                        )
+
+                    ),
+                ),
+                repeatable=True,
+                locations=(
+                    NameNode(value='OBJECT'),
+                    NameNode(value='INTERFACE')
+                )
+            ),
+            # directive @shareable repeatable on FIELD_DEFINITION | OBJECT
+            DirectiveDefinitionNode(
+                name=NameNode(value="shareable"),
+                arguments=(),
+                repeatable=True,
+                locations=(
+                    NameNode(value='FIELD_DEFINITION'),
+                    NameNode(value='OBJECT'),
+                )
+            ),
+            # type User @key(fields: "id") {
+            #   id: ID!
+            #   username: String! @shareable
+            # }
+            ObjectTypeDefinitionNode(
+                name=NameNode(value='User'),
+                directives=(
+                    DirectiveNode(
+                        name=NameNode(value='key'),
+                        arguments=(
+                            ArgumentNode(
+                                name=NameNode(value='fields'),
+                                value=StringValueNode(value='id'),
+                                block=False
+                            ),
+                        )
+                    ),
+                ),
+                fields=(
+                    FieldDefinitionNode(
+                        name=NameNode(value='id'),
+                        arguments=(),
+                        type=NonNullTypeNode(
+                            type=NamedTypeNode(
+                                name=NameNode(value='ID')
+                            )
+                        ),
+                    ),
+                    FieldDefinitionNode(
+                        name=NameNode(value='username'),
+                        type=NonNullTypeNode(
+                            type=NamedTypeNode(
+                                name=NameNode(value='String')
+                            )
+                        ),
+                        directives=(
+                            DirectiveNode(
+                                name=NameNode(value='shareable'),
+                                arguments=(),
+                            ),
+                        ),
+                    ),
+                )
+            ),
+            ObjectTypeDefinitionNode(
+                name=NameNode(value='Query'),
+                fields=(
+                    FieldDefinitionNode(
+                        name=NameNode(value='me'),
+                        type=NamedTypeNode(
+                            name=NameNode(value='User')
+                        )
+                    ),
+                )
+            )
+        )
+    )
+    s1 = build_ast_schema(subgraph_ast1)
 
     subgraph_text2 = """\
 scalar FieldSet
@@ -34,6 +165,7 @@ type Query {
 }
 """
     schema_from_text2 = build_schema(subgraph_text2)
+    print("# Subgraph 2")
     print(print_schema(schema_from_text2))
 
     subgraph_text3 = """\
@@ -60,6 +192,7 @@ type Product @key(fields: "upc") {
 }
 """
     schema_from_text3 = build_schema(subgraph_text3)
+    print("# Subgraph 3")
     print(print_schema(schema_from_text3))
 
 
