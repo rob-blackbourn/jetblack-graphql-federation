@@ -9,7 +9,7 @@ from graphql import (
 from ...types import AbstractDirective
 
 
-class ShareableDirective(AbstractDirective):
+class ShareableDirective[NoneType](AbstractDirective):
 
     Type = GraphQLDirective(
         name="shareable",
@@ -32,7 +32,7 @@ class ShareableDirective(AbstractDirective):
     )
 
     @classmethod
-    def Node(cls) -> DirectiveNode:  # pylint: disable=arguments-differ
+    def Node(cls) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value='shareable'),
             arguments=(),

@@ -1,19 +1,26 @@
+from typing import ClassVar
+
 from ..v1_0 import Federation as v1_0
 
 from .directives import (
     ExternalDirective,
+    ExternalKwargs,
     InaccessibleDirective,
     KeyDirective,
+    KeyKwargs,
     OverrideDirective,
     ProvidesDirective,
     RequiresDirective,
     ShareableDirective,
+    ShareableKwargs,
     TagDirective
 )
 
 from ..types import AbstractDirective
 
 from .scalars import FieldSet, FieldSetNode
+
+type KeyDirectiveType = type[AbstractDirective[KeyKwargs]]
 
 
 class Federation:
@@ -28,11 +35,13 @@ class Federation:
     FieldSet = FieldSet
 
     # Directives
-    KeyDirective: type[AbstractDirective] = KeyDirective
+    KeyDirective: ClassVar[KeyDirectiveType] = KeyDirective
     RequiresDirective = RequiresDirective
     ProvidesDirective = ProvidesDirective
-    ExternalDirective = ExternalDirective
-    ShareableDirective: type[AbstractDirective] = ShareableDirective
+    ExternalDirective: type[AbstractDirective[ExternalKwargs]
+                            ] = ExternalDirective
+    ShareableDirective: type[AbstractDirective[ShareableKwargs]
+                             ] = ShareableDirective
     ExtendsDirective = v1_0.ExtendsDirective
     OverrideDirective = OverrideDirective
     InaccessibleDirective = InaccessibleDirective

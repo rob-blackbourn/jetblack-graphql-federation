@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+from typing import Any, Mapping, Unpack, TypedDict, ParamSpecKwargs
 
 from graphql import (
     DirectiveDefinitionNode,
@@ -7,7 +8,7 @@ from graphql import (
 )
 
 
-class AbstractDirective(metaclass=ABCMeta):
+class AbstractDirective[NodeKwargs: Mapping](metaclass=ABCMeta):
 
     Type: GraphQLDirective
 
@@ -16,5 +17,5 @@ class AbstractDirective(metaclass=ABCMeta):
 
     @abstractmethod
     @classmethod
-    def Node(cls, *args, **kwargs) -> DirectiveNode:
+    def Node(cls, **kwargs: NodeKwargs) -> DirectiveNode:
         ...

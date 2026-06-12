@@ -54,7 +54,7 @@ type Query {
             ObjectTypeDefinitionNode(
                 name=NameNode(value='User'),
                 directives=(
-                    Federation.KeyDirective.Node("id")
+                    Federation.KeyDirective.Node(fields="id")
                 ),
                 fields=(
                     FieldDefinitionNode(
