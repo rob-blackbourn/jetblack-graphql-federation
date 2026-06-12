@@ -4,33 +4,10 @@ from graphql import (
     GraphQLBoolean,
     GraphQLDirective,
     GraphQLNonNull,
-    GraphQLScalarType,
     GraphQLString,
-    NameNode,
-    ScalarTypeDefinitionNode,
-    StringValueNode
 )
 
-from .v1_0 import ExtendsDirective
-
-
-FIELD_SET_DESCRIPTION = (
-    "A string serialized scalar represent a set of fields that's passes to "
-    "a federated directive, such as @key, @requires, or @provides"
-)
-
-FIELD_SET_NAME = "FieldSet"
-
-FieldSet = GraphQLScalarType(
-    name=FIELD_SET_NAME,
-    description=FIELD_SET_DESCRIPTION
-)
-
-FieldSetNode = ScalarTypeDefinitionNode(
-    name=NameNode(value=FIELD_SET_NAME),
-    description=StringValueNode(value=FIELD_SET_DESCRIPTION),
-)
-
+from .scalars import FieldSet
 
 KeyDirective = GraphQLDirective(
     name="key",
@@ -135,20 +112,3 @@ TagDirective = GraphQLDirective(
     ),
     description="Federation @tag directive",
 )
-
-
-def get_directives() -> dict[str, GraphQLDirective]:
-    return {
-        directive.name: directive
-        for directive in [
-            KeyDirective,
-            RequiresDirective,
-            ProvidesDirective,
-            ExternalDirective,
-            ShareableDirective,
-            ExtendsDirective,  # From v1.0
-            OverrideDirective,
-            InaccessibleDirective,
-            TagDirective,
-        ]
-    }

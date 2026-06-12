@@ -6,8 +6,7 @@ from graphql import (
     GraphQLList,
 )
 
-from ..scalars import Scope
-from .v2_4 import get_directives as get_directives_v2_4
+from .scalars import Scope
 
 
 AuthenticatedDirective = GraphQLDirective(
@@ -40,15 +39,3 @@ RequiresScopeDirective = GraphQLDirective(
     },
     description="Federation @requiresScopes directive",
 )
-
-
-# No Change, Added Subscription Support
-def get_directives() -> dict[str, GraphQLDirective]:
-    directives = get_directives_v2_4()
-    directives.update(
-        {
-            directive.name: directive
-            for directive in [AuthenticatedDirective, RequiresScopeDirective]
-        }
-    )
-    return directives

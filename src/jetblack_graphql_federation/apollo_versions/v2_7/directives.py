@@ -6,7 +6,6 @@ from graphql import (
     GraphQLString,
 )
 
-from .v2_6 import get_directives as get_directives_v2_6
 
 OverrideDirective = GraphQLDirective(
     name="override",
@@ -19,11 +18,3 @@ OverrideDirective = GraphQLDirective(
     },
     description="Federation @override directive",
 )
-
-
-# @override Change, Added label argument
-def get_directives() -> dict[str, GraphQLDirective]:
-    directives = get_directives_v2_6()
-    directives.update(
-        {directive.name: directive for directive in [OverrideDirective]})
-    return directives

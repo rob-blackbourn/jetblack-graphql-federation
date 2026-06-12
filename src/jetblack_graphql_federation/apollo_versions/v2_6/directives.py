@@ -6,8 +6,7 @@ from graphql import (
     GraphQLList,
 )
 
-from ..scalars import Policy
-from .v2_5 import get_directives as get_directives_v2_5
+from .scalars import Policy
 
 PolicyDirective = GraphQLDirective(
     name="policy",
@@ -28,11 +27,3 @@ PolicyDirective = GraphQLDirective(
     },
     description="Federation @policy directive",
 )
-
-
-# No Change, Added Subscription Support
-def get_directives() -> dict[str, GraphQLDirective]:
-    directives = get_directives_v2_5()
-    directives.update(
-        {directive.name: directive for directive in [PolicyDirective]})
-    return directives
