@@ -1,4 +1,4 @@
-from .implementation import Federation
+from .federation import Federation
 
 __all__ = [
     'Federation'

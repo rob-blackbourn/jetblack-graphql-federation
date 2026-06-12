@@ -5,6 +5,12 @@ from .scalars import Scope, ScopeNode
 
 
 class Federation(v2_4):
+    """Federation v2.5
+
+    See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v25
+    """
+
+    VERSION = "2.5"
 
     # Scalars
     Scope = Scope

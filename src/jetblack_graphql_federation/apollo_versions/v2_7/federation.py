@@ -4,6 +4,12 @@ from .directives import OverrideDirective
 
 
 class Federation(v2_6):
+    """Federation v2.7
+
+    See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v27
+    """
+
+    VERSION = "v.27"
 
     # Directives
     OverrideDirective = OverrideDirective

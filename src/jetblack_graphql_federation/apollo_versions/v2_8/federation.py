@@ -5,6 +5,12 @@ from .scalars import ContextFieldValue
 
 
 class Federation(v2_7):
+    """Federation v2.8
+
+    See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v28
+    """
+
+    VERSION = "2.8"
 
     # Scalars
     ContextFieldValue = ContextFieldValue

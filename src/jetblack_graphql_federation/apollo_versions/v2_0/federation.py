@@ -15,6 +15,12 @@ from .scalars import FieldSet
 
 
 class Federation:
+    """Federation v2.0
+
+    See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v20
+    """
+
+    VERSION = "v2.0"
 
     # Scalars
     FieldSet = FieldSet
