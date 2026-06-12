@@ -4,14 +4,14 @@ from .directives import (
     ExternalDirective,
     InaccessibleDirective,
     KeyDirective,
-    KeyDirectiveDefinitionNode,
     OverrideDirective,
     ProvidesDirective,
     RequiresDirective,
     ShareableDirective,
-    ShareableDirectiveDefinitionNode,
     TagDirective
 )
+
+from ..types import AbstractDirective
 
 from .scalars import FieldSet, FieldSetNode
 
@@ -28,11 +28,11 @@ class Federation:
     FieldSet = FieldSet
 
     # Directives
-    KeyDirective = KeyDirective
+    KeyDirective: type[AbstractDirective] = KeyDirective
     RequiresDirective = RequiresDirective
     ProvidesDirective = ProvidesDirective
     ExternalDirective = ExternalDirective
-    ShareableDirective = ShareableDirective
+    ShareableDirective: type[AbstractDirective] = ShareableDirective
     ExtendsDirective = v1_0.ExtendsDirective
     OverrideDirective = OverrideDirective
     InaccessibleDirective = InaccessibleDirective
@@ -40,7 +40,3 @@ class Federation:
 
     # Scalar Nodes
     FieldSetNode = FieldSetNode
-
-    # Directive Definition Nodes
-    KeyDirectiveDefinitionNode = KeyDirectiveDefinitionNode
-    ShareableDirectiveDefinitionNode = ShareableDirectiveDefinitionNode

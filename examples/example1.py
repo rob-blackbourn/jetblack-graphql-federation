@@ -3,7 +3,6 @@ from graphql import (
     build_schema,
     parse,
     print_schema,
-    ArgumentNode,
     DirectiveNode,
     DocumentNode,
     FieldDefinitionNode,
@@ -11,7 +10,6 @@ from graphql import (
     NamedTypeNode,
     NonNullTypeNode,
     ObjectTypeDefinitionNode,
-    StringValueNode,
 )
 
 from jetblack_graphql_federation.v2_11 import Federation
@@ -46,9 +44,9 @@ type Query {
             # scalar FieldSet
             Federation.FieldSetNode,
             # directive @key(fields: FieldSet!, resolvable: Boolean = true) repeatable on OBJECT | INTERFACE
-            Federation.KeyDirectiveDefinitionNode,
+            Federation.KeyDirective.DefinitionNode,
             # directive @shareable repeatable on FIELD_DEFINITION | OBJECT
-            Federation.ShareableDirectiveDefinitionNode,
+            Federation.ShareableDirective.DefinitionNode,
             # type User @key(fields: "id") {
             #   id: ID!
             #   username: String! @shareable
@@ -56,16 +54,7 @@ type Query {
             ObjectTypeDefinitionNode(
                 name=NameNode(value='User'),
                 directives=(
-                    DirectiveNode(
-                        name=NameNode(value='key'),
-                        arguments=(
-                            ArgumentNode(
-                                name=NameNode(value='fields'),
-                                value=StringValueNode(value='id'),
-                                block=False
-                            ),
-                        )
-                    ),
+                    Federation.KeyDirective.Node("id")
                 ),
                 fields=(
                     FieldDefinitionNode(
