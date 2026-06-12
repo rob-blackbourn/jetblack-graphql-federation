@@ -6,7 +6,7 @@ from graphql import (
     GraphQLList,
 )
 
-from .scalars import Policy
+from ..scalars import Policy
 
 PolicyDirective = GraphQLDirective(
     name="policy",

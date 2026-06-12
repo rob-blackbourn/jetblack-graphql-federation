@@ -6,20 +6,8 @@ from graphql import (
     GraphQLList,
 )
 
-from .scalars import Scope
+from ..scalars import Scope
 
-
-AuthenticatedDirective = GraphQLDirective(
-    name="authenticated",
-    locations=(
-        DirectiveLocation.FIELD_DEFINITION,
-        DirectiveLocation.OBJECT,
-        DirectiveLocation.INTERFACE,
-        DirectiveLocation.SCALAR,
-        DirectiveLocation.ENUM,
-    ),
-    description="Federation @authenticated directive",
-)
 
 RequiresScopeDirective = GraphQLDirective(
     name="requiresScopes",

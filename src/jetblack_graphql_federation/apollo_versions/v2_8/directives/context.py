@@ -6,8 +6,6 @@ from graphql import (
     GraphQLString,
 )
 
-from .scalars import ContextFieldValue
-
 ContextDirective = GraphQLDirective(
     name="context",
     locations=(
@@ -19,15 +17,4 @@ ContextDirective = GraphQLDirective(
         "name": GraphQLArgument(GraphQLNonNull(GraphQLString)),
     },
     description="Federation @context directive",
-)
-
-FromContextDirective = GraphQLDirective(
-    name="from_context",
-    locations=[
-        DirectiveLocation.ARGUMENT_DEFINITION,
-    ],
-    args={
-        "field": GraphQLArgument(ContextFieldValue),
-    },
-    description="Federation @fromContext directive",
 )
