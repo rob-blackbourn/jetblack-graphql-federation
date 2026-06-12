@@ -46,9 +46,9 @@ type Query {
             # scalar FieldSet
             Federation.FieldSetNode,
             # directive @key(fields: FieldSet!, resolvable: Boolean = true) repeatable on OBJECT | INTERFACE
-            Federation.KeyDirectiveNode,
+            Federation.KeyDirectiveDefinitionNode,
             # directive @shareable repeatable on FIELD_DEFINITION | OBJECT
-            Federation.ShareableDirectiveNode,
+            Federation.ShareableDirectiveDefinitionNode,
             # type User @key(fields: "id") {
             #   id: ID!
             #   username: String! @shareable

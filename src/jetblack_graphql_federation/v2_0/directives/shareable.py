@@ -16,7 +16,7 @@ ShareableDirective = GraphQLDirective(
 )
 
 # directive @shareable repeatable on FIELD_DEFINITION | OBJECT
-ShareableDirectiveNode = DirectiveDefinitionNode(
+ShareableDirectiveDefinitionNode = DirectiveDefinitionNode(
     name=NameNode(value="shareable"),
     arguments=(),
     repeatable=True,

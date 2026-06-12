@@ -1,7 +1,9 @@
 from graphql import (
+    ArgumentNode,
     BooleanValueNode,
     DirectiveDefinitionNode,
     DirectiveLocation,
+    DirectiveNode,
     GraphQLArgument,
     GraphQLBoolean,
     GraphQLDirective,
@@ -10,6 +12,7 @@ from graphql import (
     NameNode,
     NamedTypeNode,
     NonNullTypeNode,
+    StringValueNode,
 )
 
 from ..scalars import FieldSet
@@ -29,9 +32,11 @@ KeyDirective = GraphQLDirective(
     is_repeatable=True,
 )
 
-# directive @key(fields: FieldSet!, resolvable: Boolean = true)
-#     repeatable on OBJECT | INTERFACE
-KeyDirectiveNode = DirectiveDefinitionNode(
+# directive @key(
+#   fields: FieldSet!,
+#   resolvable: Boolean = true
+# ) repeatable on OBJECT | INTERFACE
+KeyDirectiveDefinitionNode = DirectiveDefinitionNode(
     name=NameNode(value="key"),
     arguments=(
         InputValueDefinitionNode(
@@ -62,3 +67,19 @@ KeyDirectiveNode = DirectiveDefinitionNode(
         NameNode(value='INTERFACE')
     )
 )
+
+
+def make_key_directive(fields: str, resolvable: bool = True) -> DirectiveNode:
+    return DirectiveNode(
+        name=NameNode(value='key'),
+        arguments=(
+            ArgumentNode(
+                name=NameNode(value='fields'),
+                value=StringValueNode(value=fields, block=False),
+            ),
+            ArgumentNode(
+                name=NameNode(value='resolvable'),
+                value=BooleanValueNode(value=resolvable),
+            ),
+        )
+    )

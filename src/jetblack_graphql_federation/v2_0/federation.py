@@ -4,12 +4,12 @@ from .directives import (
     ExternalDirective,
     InaccessibleDirective,
     KeyDirective,
-    KeyDirectiveNode,
+    KeyDirectiveDefinitionNode,
     OverrideDirective,
     ProvidesDirective,
     RequiresDirective,
     ShareableDirective,
-    ShareableDirectiveNode,
+    ShareableDirectiveDefinitionNode,
     TagDirective
 )
 
@@ -41,6 +41,6 @@ class Federation:
     # Scalar Nodes
     FieldSetNode = FieldSetNode
 
-    # Directive Nodes
-    KeyDirectiveNode = KeyDirectiveNode
-    ShareableDirectiveNode = ShareableDirectiveNode
+    # Directive Definition Nodes
+    KeyDirectiveDefinitionNode = KeyDirectiveDefinitionNode
+    ShareableDirectiveDefinitionNode = ShareableDirectiveDefinitionNode

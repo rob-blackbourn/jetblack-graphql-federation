@@ -1,10 +1,10 @@
 from .external import ExternalDirective
 from .inaccessible import InaccessibleDirective
-from .key import KeyDirective, KeyDirectiveNode
+from .key import KeyDirective, KeyDirectiveDefinitionNode
 from .override import OverrideDirective
 from .provides import ProvidesDirective
 from .requires import RequiresDirective
-from .shareable import ShareableDirective, ShareableDirectiveNode
+from .shareable import ShareableDirective, ShareableDirectiveDefinitionNode
 from .tag import TagDirective
 
 
@@ -17,7 +17,7 @@ __all__ = [
 
     # .key
     'KeyDirective',
-    'KeyDirectiveNode',
+    'KeyDirectiveDefinitionNode',
 
     # .override
     'OverrideDirective',
@@ -30,7 +30,7 @@ __all__ = [
 
     # .shareable
     'ShareableDirective',
-    'ShareableDirectiveNode',
+    'ShareableDirectiveDefinitionNode',
 
     # .tag
     'TagDirective',
