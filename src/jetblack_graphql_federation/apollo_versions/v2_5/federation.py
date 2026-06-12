@@ -10,7 +10,7 @@ class Federation(v2_4):
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v25
     """
 
-    VERSION = "2.5"
+    VERSION = "v2.5"
 
     # Scalars
     Scope = Scope

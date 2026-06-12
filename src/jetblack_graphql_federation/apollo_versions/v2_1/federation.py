@@ -9,6 +9,6 @@ class Federation(v2_0):
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v21
     """
 
-    VERSION = "2.1"
+    VERSION = "v2.1"
 
     ComposeDirective = ComposeDirective

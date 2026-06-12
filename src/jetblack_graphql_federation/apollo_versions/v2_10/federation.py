@@ -7,4 +7,4 @@ class Federation(v2_9):
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v210
     """
 
-    VERSION = "v2.20"
+    VERSION = "v2.10"

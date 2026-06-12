@@ -9,7 +9,7 @@ class Federation(v2_6):
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v27
     """
 
-    VERSION = "v.27"
+    VERSION = "v2.7"
 
     # Directives
     OverrideDirective = OverrideDirective

@@ -10,7 +10,7 @@ class Federation(v2_7):
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v28
     """
 
-    VERSION = "2.8"
+    VERSION = "v2.8"
 
     # Scalars
     ContextFieldValue = ContextFieldValue

@@ -9,6 +9,6 @@ class Federation(v2_2):
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v23
     """
 
-    VERSION = "2.3"
+    VERSION = "v2.3"
 
     InterfaceObjectDirective = InterfaceObjectDirective
