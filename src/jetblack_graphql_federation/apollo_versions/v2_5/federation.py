@@ -1,10 +1,10 @@
-from ..v2_4 import Federation as v2_4
+from ..v2_4 import Federation as _Federation
 
 from .directives import AuthenticatedDirective, RequiresScopeDirective
 from .scalars import Scope, ScopeNode
 
 
-class Federation(v2_4):
+class Federation(_Federation):
     """Federation v2.5
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v25

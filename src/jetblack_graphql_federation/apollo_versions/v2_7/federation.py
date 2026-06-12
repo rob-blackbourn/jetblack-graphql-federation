@@ -1,9 +1,9 @@
-from ..v2_6 import Federation as v2_6
+from ..v2_6 import Federation as _Federation
 
 from .directives import OverrideDirective
 
 
-class Federation(v2_6):
+class Federation(_Federation):
     """Federation v2.7
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v27

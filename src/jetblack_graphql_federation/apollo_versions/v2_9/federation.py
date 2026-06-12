@@ -1,9 +1,9 @@
-from ..v2_8 import Federation as v2_8
+from ..v2_8 import Federation as _Federation
 
 from .directives import ListSizeDirective, RequiresScopeDirective
 
 
-class Federation(v2_8):
+class Federation(_Federation):
     """Federation v2.9
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v29

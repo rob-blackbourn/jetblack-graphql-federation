@@ -1,9 +1,9 @@
-from ..v2_1 import Federation as v2_1
+from ..v2_1 import Federation as _Federation
 
 from .directives import ShareableDirective
 
 
-class Federation(v2_1):
+class Federation(_Federation):
     """Federation v2.2
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v22
