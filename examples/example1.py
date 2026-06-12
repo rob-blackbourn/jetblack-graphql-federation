@@ -4,19 +4,17 @@ from graphql import (
     parse,
     print_schema,
     ArgumentNode,
-    BooleanValueNode,
     DirectiveNode,
-    DirectiveDefinitionNode,
     DocumentNode,
     FieldDefinitionNode,
-    InputValueDefinitionNode,
     NameNode,
     NamedTypeNode,
     NonNullTypeNode,
     ObjectTypeDefinitionNode,
-    ScalarTypeDefinitionNode,
     StringValueNode,
 )
+
+from jetblack_graphql_federation.v2_11 import Federation
 
 
 def main() -> None:
@@ -46,51 +44,11 @@ type Query {
     subgraph_ast1 = DocumentNode(
         definitions=(
             # scalar FieldSet
-            ScalarTypeDefinitionNode(
-                name=NameNode(value='FieldSet'),
-            ),
+            Federation.FieldSetNode,
             # directive @key(fields: FieldSet!, resolvable: Boolean = true) repeatable on OBJECT | INTERFACE
-            DirectiveDefinitionNode(
-                name=NameNode(value="key"),
-                arguments=(
-                    InputValueDefinitionNode(
-                        name=NameNode(value="fields"),
-                        type=NonNullTypeNode(
-                            type=NamedTypeNode(
-                                name=NameNode(
-                                    value="FieldSet"
-                                )
-
-                            )
-                        )
-                    ),
-                    InputValueDefinitionNode(
-                        name=NameNode(value="resolvable"),
-                        type=NamedTypeNode(
-                            name=NameNode(value='Boolean')
-                        ),
-                        default_value=BooleanValueNode(
-                            value=True
-                        )
-
-                    ),
-                ),
-                repeatable=True,
-                locations=(
-                    NameNode(value='OBJECT'),
-                    NameNode(value='INTERFACE')
-                )
-            ),
+            Federation.KeyDirectiveNode,
             # directive @shareable repeatable on FIELD_DEFINITION | OBJECT
-            DirectiveDefinitionNode(
-                name=NameNode(value="shareable"),
-                arguments=(),
-                repeatable=True,
-                locations=(
-                    NameNode(value='FIELD_DEFINITION'),
-                    NameNode(value='OBJECT'),
-                )
-            ),
+            Federation.ShareableDirectiveNode,
             # type User @key(fields: "id") {
             #   id: ID!
             #   username: String! @shareable

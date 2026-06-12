@@ -1,5 +1,6 @@
 from .directives import (
     ExtendsDirective,
+    ExtendsDirectiveNode,
     ExternalDirective,
     KeyDirective,
     ProvidesDirective,
@@ -29,3 +30,6 @@ class Federation:
     ProvidesDirective = ProvidesDirective
     ExternalDirective = ExternalDirective
     ExtendsDirective = ExtendsDirective
+
+    # Directive Definition Nodes
+    ExtendsDirectiveNode = ExtendsDirectiveNode
