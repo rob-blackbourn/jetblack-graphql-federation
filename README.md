@@ -1,3 +1,4 @@
 # jetblack-graphql-federation
 
-Let's go psycho!
+This is work in progress.
+

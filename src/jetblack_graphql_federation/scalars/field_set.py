@@ -10,26 +10,14 @@ _DESCRIPTION = (
     "a federated directive, such as @key, @requires, or @provides"
 )
 
-_NAME_V1 = "_FieldSet"
-
-_FieldSet = GraphQLScalarType(
-    name=_NAME_V1,
-    description=_DESCRIPTION
-)
-
-_FieldSetNode = ScalarTypeDefinitionNode(
-    name=NameNode(value=_NAME_V1),
-    description=StringValueNode(value=_DESCRIPTION),
-)
-
-_NAME_V2 = "FieldSet"
+_NAME = "FieldSet"
 
 FieldSet = GraphQLScalarType(
-    name=_NAME_V2,
+    name=_NAME,
     description=_DESCRIPTION
 )
 
 FieldSetNode = ScalarTypeDefinitionNode(
-    name=NameNode(value=_NAME_V2),
+    name=NameNode(value=_NAME),
     description=StringValueNode(value=_DESCRIPTION),
 )

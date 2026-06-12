@@ -3,24 +3,48 @@ from graphql import (
     GraphQLArgument,
     GraphQLDirective,
     GraphQLNonNull,
+    GraphQLScalarType,
+    NameNode,
+    ScalarTypeDefinitionNode,
+    StringValueNode,
 )
 
-from ..scalars import _FieldSet
 
+_FIELD_SET_DESCRIPTION = (
+    "A string serialized scalar represent a set of fields that's passes to "
+    "a federated directive, such as @key, @requires, or @provides"
+)
+
+_FIELD_SET_NAME = "_FieldSet"
+
+_FieldSet = GraphQLScalarType(
+    name=_FIELD_SET_NAME,
+    description=_FIELD_SET_DESCRIPTION
+)
+
+_FieldSetNode = ScalarTypeDefinitionNode(
+    name=NameNode(value=_FIELD_SET_NAME),
+    description=StringValueNode(value=_FIELD_SET_DESCRIPTION),
+)
+
+KEY_NAME = "key"
+FIELDS_NAME = "fields"
 
 KeyDirective = GraphQLDirective(
-    name="key",
+    name=KEY_NAME,
     locations=(
         DirectiveLocation.OBJECT,
         DirectiveLocation.INTERFACE,
     ),
-    args={"fields": GraphQLArgument(GraphQLNonNull(_FieldSet))},
+    args={FIELDS_NAME: GraphQLArgument(GraphQLNonNull(_FieldSet))},
     description="Federation @key directive",
     is_repeatable=True,
 )
 
+REQUIRES_NAME = "requires"
+
 RequiresDirective = GraphQLDirective(
-    name="requires",
+    name=REQUIRES_NAME,
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
     ),
@@ -28,9 +52,10 @@ RequiresDirective = GraphQLDirective(
     description="Federation @requires directive",
 )
 
+PROVIDES_NAME = "provides"
 
 ProvidesDirective = GraphQLDirective(
-    name="provides",
+    name=PROVIDES_NAME,
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
     ),
@@ -38,16 +63,20 @@ ProvidesDirective = GraphQLDirective(
     description="Federation @provides directive",
 )
 
+EXTERNALS_NAME = "external"
+
 ExternalDirective = GraphQLDirective(
-    name="external",
+    name=EXTERNALS_NAME,
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
     ),
     description="Federation @external directive",
 )
 
+EXTENDS_NAME = "extends"
+
 ExtendsDirective = GraphQLDirective(
-    name="extends",
+    name=EXTENDS_NAME,
     locations=(
         DirectiveLocation.OBJECT,
         DirectiveLocation.INTERFACE,

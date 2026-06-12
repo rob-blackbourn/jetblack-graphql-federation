@@ -1,5 +1,5 @@
 from .context_field_value import ContextFieldValue
-from .field_set import _FieldSet, FieldSet, _FieldSetNode, FieldSetNode
+from .field_set import FieldSet, FieldSetNode
 from .link_import import link_Import, link_ImportNode
 from .link_purpose import link_Purpose, link_PurposeNode
 from .policy import Policy, PolicyNode
@@ -11,9 +11,7 @@ __all__ = [
     'ContextFieldValue',
 
     # .field_set
-    '_FieldSet',
     'FieldSet',
-    '_FieldSetNode',
     'FieldSetNode',
 
     # .link_import
