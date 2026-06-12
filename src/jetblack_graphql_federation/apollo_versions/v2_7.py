@@ -8,7 +8,7 @@ from graphql import (
 
 from .v2_6 import get_directives as get_directives_v2_6
 
-override_directive = GraphQLDirective(
+OverrideDirective = GraphQLDirective(
     name="override",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -25,5 +25,5 @@ override_directive = GraphQLDirective(
 def get_directives() -> dict[str, GraphQLDirective]:
     directives = get_directives_v2_6()
     directives.update(
-        {directive.name: directive for directive in [override_directive]})
+        {directive.name: directive for directive in [OverrideDirective]})
     return directives

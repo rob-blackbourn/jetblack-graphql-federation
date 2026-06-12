@@ -9,10 +9,10 @@ from graphql import (
 
 from ..scalars import FieldSet
 
-from .v1_0 import extends_directive
+from .v1_0 import ExtendsDirective
 
 
-key_directive = GraphQLDirective(
+KeyDirective = GraphQLDirective(
     name="key",
     locations=(
         DirectiveLocation.OBJECT,
@@ -27,7 +27,7 @@ key_directive = GraphQLDirective(
     is_repeatable=True,
 )
 
-requires_directive = GraphQLDirective(
+RequiresDirective = GraphQLDirective(
     name="requires",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -39,7 +39,7 @@ requires_directive = GraphQLDirective(
 )
 
 
-provides_directive = GraphQLDirective(
+ProvidesDirective = GraphQLDirective(
     name="provides",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -51,7 +51,7 @@ provides_directive = GraphQLDirective(
 )
 
 
-external_directive = GraphQLDirective(
+ExternalDirective = GraphQLDirective(
     name="external",
     locations=(
         DirectiveLocation.OBJECT,  # Changed from v1.0
@@ -61,7 +61,7 @@ external_directive = GraphQLDirective(
 )
 
 
-shareable_directive = GraphQLDirective(
+ShareableDirective = GraphQLDirective(
     name="shareable",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -71,7 +71,7 @@ shareable_directive = GraphQLDirective(
 )
 
 
-override_directive = GraphQLDirective(
+OverrideDirective = GraphQLDirective(
     name="override",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -82,7 +82,7 @@ override_directive = GraphQLDirective(
     description="Federation @override directive",
 )
 
-inaccessible_directive = GraphQLDirective(
+InaccessibleDirective = GraphQLDirective(
     name="inaccessible",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -99,7 +99,7 @@ inaccessible_directive = GraphQLDirective(
     description="Federation @inaccessible directive",
 )
 
-tag_directive = GraphQLDirective(
+TagDirective = GraphQLDirective(
     name="tag",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -121,14 +121,14 @@ def get_directives() -> dict[str, GraphQLDirective]:
     return {
         directive.name: directive
         for directive in [
-            key_directive,
-            requires_directive,
-            provides_directive,
-            external_directive,
-            shareable_directive,
-            extends_directive,  # From v1.0
-            override_directive,
-            inaccessible_directive,
-            tag_directive,
+            KeyDirective,
+            RequiresDirective,
+            ProvidesDirective,
+            ExternalDirective,
+            ShareableDirective,
+            ExtendsDirective,  # From v1.0
+            OverrideDirective,
+            InaccessibleDirective,
+            TagDirective,
         ]
     }

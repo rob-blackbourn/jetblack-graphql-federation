@@ -10,7 +10,7 @@ from ..scalars import ContextFieldValue
 
 from .v2_7 import get_directives as get_directives_v2_7
 
-context_directive = GraphQLDirective(
+ContextDirective = GraphQLDirective(
     name="context",
     locations=(
         DirectiveLocation.OBJECT,
@@ -23,7 +23,7 @@ context_directive = GraphQLDirective(
     description="Federation @context directive",
 )
 
-from_context_directive = GraphQLDirective(
+FromContextDirective = GraphQLDirective(
     name="from_context",
     locations=[
         DirectiveLocation.ARGUMENT_DEFINITION,
@@ -41,7 +41,7 @@ def get_directives() -> dict[str, GraphQLDirective]:
     directives.update(
         {
             directive.name: directive
-            for directive in [context_directive, from_context_directive]
+            for directive in [ContextDirective, FromContextDirective]
         }
     )
     return directives

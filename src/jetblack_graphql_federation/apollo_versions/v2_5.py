@@ -10,7 +10,7 @@ from ..scalars import Scope
 from .v2_4 import get_directives as get_directives_v2_4
 
 
-authenticated_directive = GraphQLDirective(
+AuthenticatedDirective = GraphQLDirective(
     name="authenticated",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -22,7 +22,7 @@ authenticated_directive = GraphQLDirective(
     description="Federation @authenticated directive",
 )
 
-requires_scope_directive = GraphQLDirective(
+RequiresScopeDirective = GraphQLDirective(
     name="requiresScopes",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -48,7 +48,7 @@ def get_directives() -> dict[str, GraphQLDirective]:
     directives.update(
         {
             directive.name: directive
-            for directive in [authenticated_directive, requires_scope_directive]
+            for directive in [AuthenticatedDirective, RequiresScopeDirective]
         }
     )
     return directives

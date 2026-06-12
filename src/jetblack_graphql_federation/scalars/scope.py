@@ -3,6 +3,8 @@ from typing import Any
 from graphql import (
     GraphQLError,
     GraphQLScalarType,
+    NameNode,
+    ScalarTypeDefinitionNode,
     StringValueNode,
     ValueNode,
     print_ast,
@@ -42,11 +44,19 @@ def _parse_string_literal(value_node: ValueNode, _variables: Any = None) -> str:
     return value_node.value
 
 
+_NAME = "federation__Scope"
+_DESCRIPTION = "This string-serialized scalar represents a JWT scope"
+
 # Reference: https://www.apollographql.com/docs/federation/subgraph-spec/
 Scope = GraphQLScalarType(
-    name="federation__Scope",
-    description="This string-serialized scalar represents a JWT scope",
+    name=_NAME,
+    description=_DESCRIPTION,
     serialize=_serialize_string,
     parse_value=_coerce_string,
     parse_literal=_parse_string_literal,
+)
+
+ScopeNode = ScalarTypeDefinitionNode(
+    name=NameNode(value=_NAME),
+    description=StringValueNode(value=_DESCRIPTION),
 )

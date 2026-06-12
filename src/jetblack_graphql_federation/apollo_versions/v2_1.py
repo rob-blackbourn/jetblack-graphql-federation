@@ -8,7 +8,7 @@ from graphql import (
 
 from .v2_0 import get_directives as get_directives_v2_0
 
-compose_directive = GraphQLDirective(
+ComposeDirective = GraphQLDirective(
     name="composeDirective",
     locations=(
         DirectiveLocation.SCHEMA,
@@ -23,5 +23,5 @@ compose_directive = GraphQLDirective(
 def get_directives() -> dict[str, GraphQLDirective]:
     directives = get_directives_v2_0()
     directives.update(
-        {directive.name: directive for directive in [compose_directive]})
+        {directive.name: directive for directive in [ComposeDirective]})
     return directives

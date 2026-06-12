@@ -11,7 +11,7 @@ from graphql import (
 
 from .v2_8 import get_directives as get_directives_v2_8
 
-list_size_directive = GraphQLDirective(
+ListSizeDirective = GraphQLDirective(
     name="listSize",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -27,7 +27,7 @@ list_size_directive = GraphQLDirective(
     description="Federation @listSize directive",
 )
 
-requires_scope_directive = GraphQLDirective(
+RequiresScopeDirective = GraphQLDirective(
     name="cost",
     locations=(
         DirectiveLocation.ARGUMENT_DEFINITION,
@@ -50,7 +50,7 @@ def get_directives() -> dict[str, GraphQLDirective]:
     directives.update(
         {
             directive.name: directive
-            for directive in [list_size_directive, requires_scope_directive]
+            for directive in [ListSizeDirective, RequiresScopeDirective]
         }
     )
     return directives

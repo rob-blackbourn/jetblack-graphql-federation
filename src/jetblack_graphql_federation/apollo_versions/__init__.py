@@ -60,7 +60,8 @@ def get_directives_based_on_version(
 
 
 def get_directive_from_name(
-    directive_name: str, federation_version: FederationVersion
+    directive_name: str,
+    federation_version: FederationVersion
 ) -> GraphQLDirective:
     """
     Get the GraphQL directive for the specified name with the given federation version

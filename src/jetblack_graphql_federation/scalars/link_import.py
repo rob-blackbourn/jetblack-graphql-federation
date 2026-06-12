@@ -3,6 +3,8 @@ from typing import Any
 from graphql import (
     GraphQLError,
     GraphQLScalarType,
+    NameNode,
+    ScalarTypeDefinitionNode,
     StringValueNode,
     ValueNode,
     print_ast,
@@ -50,15 +52,24 @@ def _parse_string_literal(value_node: ValueNode, _variables: Any = None) -> str:
     return value_node.value
 
 
-link_import = GraphQLScalarType(
-    name="link__Import",
-    description=(
-        "A string serialized scalar specify which directives from an external "
-        "federation specification should be imported into the current schema "
-        "when using @link"
+_NAME = "link__Import"
+_DESCRIPTION = (
+    "A string serialized scalar specify which directives from an external "
+    "federation specification should be imported into the current schema "
+    "when using @link"
 
-    ),
+)
+
+link_Import = GraphQLScalarType(
+    name=_NAME,
+    description=_DESCRIPTION,
     serialize=_serialize_string,
     parse_value=_coerce_string,
     parse_literal=_parse_string_literal,
+)
+
+
+link_ImportNode = ScalarTypeDefinitionNode(
+    name=NameNode(value=_NAME),
+    description=StringValueNode(value=_DESCRIPTION),
 )

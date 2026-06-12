@@ -9,7 +9,7 @@ from graphql import (
 from ..scalars import Policy
 from .v2_5 import get_directives as get_directives_v2_5
 
-policy_directive = GraphQLDirective(
+PolicyDirective = GraphQLDirective(
     name="policy",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -34,5 +34,5 @@ policy_directive = GraphQLDirective(
 def get_directives() -> dict[str, GraphQLDirective]:
     directives = get_directives_v2_5()
     directives.update(
-        {directive.name: directive for directive in [policy_directive]})
+        {directive.name: directive for directive in [PolicyDirective]})
     return directives

@@ -8,7 +8,7 @@ from graphql import (
 from ..scalars import _FieldSet
 
 
-key_directive = GraphQLDirective(
+KeyDirective = GraphQLDirective(
     name="key",
     locations=(
         DirectiveLocation.OBJECT,
@@ -19,7 +19,7 @@ key_directive = GraphQLDirective(
     is_repeatable=True,
 )
 
-requires_directive = GraphQLDirective(
+RequiresDirective = GraphQLDirective(
     name="requires",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -29,7 +29,7 @@ requires_directive = GraphQLDirective(
 )
 
 
-provides_directive = GraphQLDirective(
+ProvidesDirective = GraphQLDirective(
     name="provides",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -38,7 +38,7 @@ provides_directive = GraphQLDirective(
     description="Federation @provides directive",
 )
 
-external_directive = GraphQLDirective(
+ExternalDirective = GraphQLDirective(
     name="external",
     locations=(
         DirectiveLocation.FIELD_DEFINITION,
@@ -46,7 +46,7 @@ external_directive = GraphQLDirective(
     description="Federation @external directive",
 )
 
-extends_directive = GraphQLDirective(
+ExtendsDirective = GraphQLDirective(
     name="extends",
     locations=(
         DirectiveLocation.OBJECT,
@@ -60,10 +60,10 @@ def get_directives() -> dict[str, GraphQLDirective]:
     return {
         directive.name: directive
         for directive in [
-            key_directive,
-            requires_directive,
-            provides_directive,
-            external_directive,
-            extends_directive,
+            KeyDirective,
+            RequiresDirective,
+            ProvidesDirective,
+            ExternalDirective,
+            ExtendsDirective,
         ]
     }
