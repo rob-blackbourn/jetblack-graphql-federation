@@ -4,14 +4,16 @@ from .directives import (
     ExternalDirective,
     InaccessibleDirective,
     KeyDirective,
+    KeyDirectiveNode,
     OverrideDirective,
     ProvidesDirective,
     RequiresDirective,
     ShareableDirective,
+    ShareableDirectiveNode,
     TagDirective
 )
 
-from .scalars import FieldSet
+from .scalars import FieldSet, FieldSetNode
 
 
 class Federation:
@@ -35,3 +37,10 @@ class Federation:
     OverrideDirective = OverrideDirective
     InaccessibleDirective = InaccessibleDirective
     TagDirective = TagDirective
+
+    # Scalar Nodes
+    FieldSetNode = FieldSetNode
+
+    # Directive Nodes
+    KeyDirectiveNode = KeyDirectiveNode
+    ShareableDirectiveNode = ShareableDirectiveNode
