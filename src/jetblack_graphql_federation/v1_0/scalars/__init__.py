@@ -1,7 +1,6 @@
-from .field_set import _FieldSet, _FieldSetNode
+from .field_set import FieldSetScalar
 
 __all__ = [
     # .field_set
-    '_FieldSet',
-    '_FieldSetNode',
+    'FieldSetScalar',
 ]

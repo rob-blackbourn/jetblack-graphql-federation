@@ -1,15 +1,28 @@
+from typing import ClassVar
+
 from .directives import (
     ExtendsDirective,
-    ExtendsDirectiveNode,
+    ExtendsKwargs,
     ExternalDirective,
+    ExternalKwargs,
     KeyDirective,
+    KeyKwargs,
     ProvidesDirective,
+    ProvidesKwargs,
     RequiresDirective,
+    RequiresKwargs,
 )
+
+from ..types import AbstractDirective, AbstractScalar
 from .scalars import (
-    _FieldSet,
-    _FieldSetNode
+    FieldSetScalar,
 )
+
+type KeyDirectiveType = type[AbstractDirective[KeyKwargs]]
+type RequiresDirectiveType = type[RequiresDirective[RequiresKwargs]]
+type ProvidesDirectiveType = type[ProvidesDirective[ProvidesKwargs]]
+type ExternalDirectiveType = type[ExternalDirective[ExternalKwargs]]
+type ExtendsDirectiveType = type[ExtendsDirective[ExtendsKwargs]]
 
 
 class Federation:
@@ -21,15 +34,11 @@ class Federation:
     VERSION = "v1.0"
 
     # Scalars
-    FieldSet = _FieldSet
-    FieldSetNode = _FieldSetNode
+    FieldSetScalar: type[AbstractScalar] = FieldSetScalar
 
     # Directives
-    KeyDirective = KeyDirective
-    RequiresDirective = RequiresDirective
-    ProvidesDirective = ProvidesDirective
-    ExternalDirective = ExternalDirective
-    ExtendsDirective = ExtendsDirective
-
-    # Directive Definition Nodes
-    ExtendsDirectiveNode = ExtendsDirectiveNode
+    KeyDirective: ClassVar[KeyDirectiveType] = KeyDirective
+    RequiresDirective: ClassVar[RequiresDirectiveType] = RequiresDirective
+    ProvidesDirective: ClassVar[ProvidesDirectiveType] = ProvidesDirective
+    ExternalDirective: ClassVar[ExternalDirectiveType] = ExternalDirective
+    ExtendsDirective: ClassVar[ExtendsDirectiveType] = ExtendsDirective

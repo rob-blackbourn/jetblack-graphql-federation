@@ -28,31 +28,38 @@ class KeyKwargs(TypedDict):
 
 
 class KeyDirective[KeyKwargs](AbstractDirective):
+    """The @key directive
+
+    directive @key(
+      fields: FieldSet!,
+      resolvable: Boolean = true
+    ) repeatable on OBJECT | INTERFACE
+    """
+
+    NAME = "key"
+    ARG_NAME_FIELDS = "fields"
+    ARG_NAME_RESOLVABLE = "resolvable"
 
     Type = GraphQLDirective(
-        name="key",
+        name=NAME,
         locations=(
             DirectiveLocation.OBJECT,
             DirectiveLocation.INTERFACE,
         ),
         args={
-            "fields": GraphQLArgument(GraphQLNonNull(FieldSet)),
+            ARG_NAME_FIELDS: GraphQLArgument(GraphQLNonNull(FieldSet)),
             # Changed from v1.0
-            "resolvable": GraphQLArgument(GraphQLBoolean, default_value=True),
+            ARG_NAME_RESOLVABLE: GraphQLArgument(GraphQLBoolean, default_value=True),
         },
-        description="Federation @key directive",
+        description=f"Federation @{NAME} directive",
         is_repeatable=True,
     )
 
-    # directive @key(
-    #   fields: FieldSet!,
-    #   resolvable: Boolean = true
-    # ) repeatable on OBJECT | INTERFACE
     DefinitionNode = DirectiveDefinitionNode(
-        name=NameNode(value="key"),
+        name=NameNode(value=NAME),
         arguments=(
             InputValueDefinitionNode(
-                name=NameNode(value="fields"),
+                name=NameNode(value=ARG_NAME_FIELDS),
                 type=NonNullTypeNode(
                     type=NamedTypeNode(
                         name=NameNode(
@@ -63,7 +70,7 @@ class KeyDirective[KeyKwargs](AbstractDirective):
                 )
             ),
             InputValueDefinitionNode(
-                name=NameNode(value="resolvable"),
+                name=NameNode(value=ARG_NAME_RESOLVABLE),
                 type=NamedTypeNode(
                     name=NameNode(value='Boolean')
                 ),
@@ -83,15 +90,18 @@ class KeyDirective[KeyKwargs](AbstractDirective):
     @classmethod
     def Node(cls, **kwargs: KeyKwargs) -> DirectiveNode:
         return DirectiveNode(
-            name=NameNode(value='key'),
+            name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
-                    name=NameNode(value='fields'),
-                    value=StringValueNode(value=kwargs['fields'], block=False),
+                    name=NameNode(value=cls.ARG_NAME_FIELDS),
+                    value=StringValueNode(
+                        value=kwargs[cls.ARG_NAME_FIELDS], block=False),
                 ),
                 ArgumentNode(
-                    name=NameNode(value='resolvable'),
-                    value=BooleanValueNode(value=kwargs['resolvable']),
+                    name=NameNode(value=cls.ARG_NAME_RESOLVABLE),
+                    value=BooleanValueNode(
+                        value=kwargs[cls.ARG_NAME_RESOLVABLE]
+                    ),
                 ),
             )
         )

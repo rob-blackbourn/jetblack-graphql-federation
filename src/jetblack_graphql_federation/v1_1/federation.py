@@ -1,6 +1,11 @@
-from ..v1_0 import Federation as v1_0
+from typing import ClassVar
 
-from .directives import TagDirective
+from ..v1_0 import Federation as v1_0
+from ..types import AbstractDirective
+
+from .directives import TagDirective, TagKwargs
+
+type TagDirectiveType = type[AbstractDirective[TagKwargs]]
 
 
 class Federation(v1_0):
@@ -12,4 +17,4 @@ class Federation(v1_0):
     VERSION = "v1.1"
 
     # Directives
-    TagDirective = TagDirective
+    TagDirective: ClassVar[TagDirectiveType] = TagDirective
