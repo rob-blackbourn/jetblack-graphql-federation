@@ -42,7 +42,7 @@ type Query {
     subgraph_ast1 = DocumentNode(
         definitions=(
             # scalar FieldSet
-            Federation.FieldSetNode,
+            Federation.FieldSetScalar.DefinitionNode,
             # directive @key(fields: FieldSet!, resolvable: Boolean = true) repeatable on OBJECT | INTERFACE
             Federation.KeyDirective.DefinitionNode,
             # directive @shareable repeatable on FIELD_DEFINITION | OBJECT
