@@ -1,4 +1,4 @@
-from typing import Required, TypedDict
+from typing import TypedDict, Required
 
 from graphql import (
     ArgumentNode,
@@ -7,47 +7,50 @@ from graphql import (
     DirectiveNode,
     GraphQLArgument,
     GraphQLDirective,
+    GraphQLInt,
     GraphQLNonNull,
-    GraphQLString,
     InputValueDefinitionNode,
+    IntValueNode,
     NameNode,
     NamedTypeNode,
     NonNullTypeNode,
-    StringValueNode,
 )
 
 from ...types import AbstractDirective
 
 
-class TagDirectiveKwargs(TypedDict):
-    name: Required[str]
+class CostDirectiveKwargs(TypedDict):
+    fields: Required[int]
 
 
-class TagDirective(AbstractDirective[TagDirectiveKwargs]):
-    """The @tag directive
+class CostDirective(AbstractDirective[CostDirectiveKwargs]):
+    """The @cost directive
 
-    directive @tag(name: String!) repeatable on
+    directive @cost(weight: Int!) on
+      | ARGUMENT_DEFINITION
+      | ENUM
       | FIELD_DEFINITION
-      | INTERFACE
+      | INPUT_FIELD_DEFINITION
       | OBJECT
-      | UNION
+      | SCALAR;
     """
 
-    NAME = 'tag'
-    ARG_NAME = 'name'
+    NAME = 'cost'
+    ARG_WEIGHT = 'weight'
 
     Type = GraphQLDirective(
         name=NAME,
         locations=(
+            DirectiveLocation.ARGUMENT_DEFINITION,
+            DirectiveLocation.ENUM,
             DirectiveLocation.FIELD_DEFINITION,
-            DirectiveLocation.INTERFACE,
+            DirectiveLocation.INPUT_FIELD_DEFINITION,
             DirectiveLocation.OBJECT,
-            DirectiveLocation.UNION,
+            DirectiveLocation.SCALAR,
         ),
         args={
-            ARG_NAME: GraphQLArgument(GraphQLNonNull(GraphQLString)),
+            ARG_WEIGHT: GraphQLArgument(GraphQLNonNull(GraphQLInt)),
         },
-        is_repeatable=True,
         description=f"Federation @{NAME} directive",
     )
 
@@ -55,34 +58,35 @@ class TagDirective(AbstractDirective[TagDirectiveKwargs]):
         name=NameNode(value=NAME),
         arguments=(
             InputValueDefinitionNode(
-                name=NameNode(value=ARG_NAME),
+                name=NameNode(value=ARG_WEIGHT),
                 type=NonNullTypeNode(
                     type=NamedTypeNode(
                         name=NameNode(
-                            value='String'
+                            value=GraphQLInt.name
                         )
-
                     )
                 )
             )
         ),
         repeatable=True,
         locations=(
+            NameNode(value='ARGUMENT_DEFINITION'),
+            NameNode(value='ENUM'),
             NameNode(value='FIELD_DEFINITION'),
-            NameNode(value='INTERFACE'),
+            NameNode(value='INPUT_FIELD_DEFINITION'),
             NameNode(value='OBJECT'),
-            NameNode(value='UNION'),
+            NameNode(value='SCALAR'),
         )
     )
 
     @classmethod
-    def Node(cls, **kwargs: TagDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, **kwargs: CostDirectiveKwargs) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
-                    name=NameNode(value=cls.ARG_NAME),
-                    value=StringValueNode(value=kwargs[cls.ARG_NAME]),
+                    name=NameNode(value=cls.ARG_WEIGHT),
+                    value=IntValueNode(value=str(kwargs[cls.ARG_WEIGHT])),
                 ),
             )
         )

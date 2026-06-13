@@ -20,18 +20,18 @@ from ...types import AbstractDirective
 from ..scalars import FieldSetScalar
 
 
-class RequiresKwargs(TypedDict):
+class RequiresDirectiveKwargs(TypedDict):
     fields: Required[str]
 
 
-class RequiresDirective[RequiresKwargs](AbstractDirective):
+class RequiresDirective(AbstractDirective[RequiresDirectiveKwargs]):
     """The @requires directive
 
     directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
     """
 
     NAME = "requires"
-    ARG_NAME_FIELDS = "fields"
+    ARG_FIELDS = "fields"
 
     RequiresDirective = GraphQLDirective(
         name=NAME,
@@ -39,7 +39,7 @@ class RequiresDirective[RequiresKwargs](AbstractDirective):
             DirectiveLocation.FIELD_DEFINITION,
         ),
         args={
-            ARG_NAME_FIELDS: GraphQLArgument(
+            ARG_FIELDS: GraphQLArgument(
                 GraphQLNonNull(FieldSetScalar.Type))
         },
         description=f"Federation @{NAME} directive",
@@ -48,7 +48,7 @@ class RequiresDirective[RequiresKwargs](AbstractDirective):
         name=NameNode(value=NAME),
         arguments=(
             InputValueDefinitionNode(
-                name=NameNode(value=ARG_NAME_FIELDS),
+                name=NameNode(value=ARG_FIELDS),
                 type=NonNullTypeNode(
                     type=NamedTypeNode(
                         name=NameNode(
@@ -61,19 +61,18 @@ class RequiresDirective[RequiresKwargs](AbstractDirective):
         ),
         repeatable=True,
         locations=(
-            NameNode(value='OBJECT'),
-            NameNode(value='INTERFACE')
+            NameNode(value='FIELD_DEFINITION'),
         )
     )
 
     @classmethod
-    def Node(cls, **kwargs: RequiresKwargs) -> DirectiveNode:
+    def Node(cls, **kwargs: RequiresDirectiveKwargs) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
-                    name=NameNode(value=cls.ARG_NAME_FIELDS),
-                    value=StringValueNode(value=kwargs[cls.ARG_NAME_FIELDS]),
+                    name=NameNode(value=cls.ARG_FIELDS),
+                    value=StringValueNode(value=kwargs[cls.ARG_FIELDS]),
                 ),
             )
         )

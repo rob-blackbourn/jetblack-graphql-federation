@@ -1,10 +1,22 @@
-from ..v2_4 import Federation as _Federation
+from typing import ClassVar
 
-from .directives import AuthenticatedDirective, RequiresScopeDirective
-from .scalars import Scope, ScopeNode
+from ..types import DirectiveType
+from ..v2_4 import Federation as Federation_v2_4
+
+from .directives import (
+    AuthenticatedDirective,
+    AuthenticatedDirectiveKwargs,
+    RequiresScopesDirective,
+    RequiresScopesDirectiveKwargs
+)
+from .scalars import ScopeScalar
+
+type ScopeScalarType = type[ScopeScalar]
+type AuthenticatedDirectiveType = DirectiveType[AuthenticatedDirectiveKwargs]
+type RequiresScopesDirectiveType = DirectiveType[RequiresScopesDirectiveKwargs]
 
 
-class Federation(_Federation):
+class Federation(Federation_v2_4):
     """Federation v2.5
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v25
@@ -13,9 +25,8 @@ class Federation(_Federation):
     VERSION = "v2.5"
 
     # Scalars
-    Scope = Scope
-    ScopeNode = ScopeNode
+    ScopeScalar: ClassVar[ScopeScalarType] = ScopeScalar
 
     # Directives
-    AuthenticatedDirective = AuthenticatedDirective
-    RequiresScopeDirective = RequiresScopeDirective
+    AuthenticatedDirective: ClassVar[AuthenticatedDirectiveType] = AuthenticatedDirective
+    RequiresScopesDirective: ClassVar[RequiresScopesDirectiveType] = RequiresScopesDirective

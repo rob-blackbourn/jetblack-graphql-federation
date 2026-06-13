@@ -1,10 +1,17 @@
-from ..v2_5 import Federation as _Federation
+from typing import ClassVar
 
-from .directives import PolicyDirective
-from .scalars import Policy, PolicyNode
+from ..types import DirectiveType
+from ..v2_5 import Federation as Federation_v2_5
+
+from .directives import PolicyDirective, PolicyDirectiveKwargs
+from .scalars import PolicyScalar
 
 
-class Federation(_Federation):
+type PolicyScalarType = type[PolicyScalar]
+type PolicyDirectiveType = DirectiveType[PolicyDirectiveKwargs]
+
+
+class Federation(Federation_v2_5):
     """Federation v2.6
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v26
@@ -13,8 +20,7 @@ class Federation(_Federation):
     VERSION = "v2.6"
 
     # Scalars
-    Policy = Policy
-    PolicyNode = PolicyNode
+    PolicyScalar: ClassVar[PolicyScalarType] = PolicyScalar
 
     # Directives
-    PolicyDirective = PolicyDirective
+    PolicyDirective: ClassVar[PolicyDirectiveType] = PolicyDirective

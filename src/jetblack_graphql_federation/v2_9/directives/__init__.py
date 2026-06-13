@@ -1,12 +1,14 @@
-from .list_size import ListSizeDirective
-from .requires_scope import RequiresScopeDirective
+from .list_size import ListSizeDirective, ListSizeDirectiveKwargs
+from .cost import CostDirective, CostDirectiveKwargs
 
 
 __all__ = [
     # .list_size
     'ListSizeDirective',
+    'ListSizeDirectiveKwargs',
 
     # .requires_scope
-    'RequiresScopeDirective',
+    'CostDirective',
+    'CostDirectiveKwargs',
 
 ]

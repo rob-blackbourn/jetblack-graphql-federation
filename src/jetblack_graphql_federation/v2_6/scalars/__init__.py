@@ -1,8 +1,7 @@
-from .policy import Policy, PolicyNode
+from .policy import PolicyScalar
 
 
 __all__ = [
     # .policy
-    'Policy',
-    'PolicyNode',
+    'PolicyScalar',
 ]

@@ -19,15 +19,15 @@ from graphql import (
 
 from ...types import AbstractDirective
 
-from ..scalars import FieldSet
+from ..scalars import FieldSetScalar
 
 
-class KeyKwargs(TypedDict):
+class KeyDirectiveKwargs(TypedDict):
     fields: Required[str]
     resolvable: NotRequired[bool]
 
 
-class KeyDirective[KeyKwargs](AbstractDirective):
+class KeyDirective(AbstractDirective[KeyDirectiveKwargs]):
     """The @key directive
 
     directive @key(
@@ -37,8 +37,8 @@ class KeyDirective[KeyKwargs](AbstractDirective):
     """
 
     NAME = "key"
-    ARG_NAME_FIELDS = "fields"
-    ARG_NAME_RESOLVABLE = "resolvable"
+    ARG_FIELDS = "fields"
+    ARG_RESOLVABLE = "resolvable"
 
     Type = GraphQLDirective(
         name=NAME,
@@ -47,9 +47,9 @@ class KeyDirective[KeyKwargs](AbstractDirective):
             DirectiveLocation.INTERFACE,
         ),
         args={
-            ARG_NAME_FIELDS: GraphQLArgument(GraphQLNonNull(FieldSet)),
+            ARG_FIELDS: GraphQLArgument(GraphQLNonNull(FieldSetScalar.Type)),
             # Changed from v1.0
-            ARG_NAME_RESOLVABLE: GraphQLArgument(GraphQLBoolean, default_value=True),
+            ARG_RESOLVABLE: GraphQLArgument(GraphQLBoolean, default_value=True),
         },
         description=f"Federation @{NAME} directive",
         is_repeatable=True,
@@ -59,20 +59,20 @@ class KeyDirective[KeyKwargs](AbstractDirective):
         name=NameNode(value=NAME),
         arguments=(
             InputValueDefinitionNode(
-                name=NameNode(value=ARG_NAME_FIELDS),
+                name=NameNode(value=ARG_FIELDS),
                 type=NonNullTypeNode(
                     type=NamedTypeNode(
                         name=NameNode(
-                            value="FieldSet"
+                            value=FieldSetScalar.NAME
                         )
 
                     )
                 )
             ),
             InputValueDefinitionNode(
-                name=NameNode(value=ARG_NAME_RESOLVABLE),
+                name=NameNode(value=ARG_RESOLVABLE),
                 type=NamedTypeNode(
-                    name=NameNode(value='Boolean')
+                    name=NameNode(value=GraphQLBoolean.name)
                 ),
                 default_value=BooleanValueNode(
                     value=True
@@ -88,19 +88,19 @@ class KeyDirective[KeyKwargs](AbstractDirective):
     )
 
     @classmethod
-    def Node(cls, **kwargs: KeyKwargs) -> DirectiveNode:
+    def Node(cls, **kwargs: KeyDirectiveKwargs) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
-                    name=NameNode(value=cls.ARG_NAME_FIELDS),
+                    name=NameNode(value=cls.ARG_FIELDS),
                     value=StringValueNode(
-                        value=kwargs[cls.ARG_NAME_FIELDS], block=False),
+                        value=kwargs[cls.ARG_FIELDS], block=False),
                 ),
                 ArgumentNode(
-                    name=NameNode(value=cls.ARG_NAME_RESOLVABLE),
+                    name=NameNode(value=cls.ARG_RESOLVABLE),
                     value=BooleanValueNode(
-                        value=kwargs[cls.ARG_NAME_RESOLVABLE]
+                        value=kwargs[cls.ARG_RESOLVABLE]
                     ),
                 ),
             )

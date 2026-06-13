@@ -11,11 +11,11 @@ from graphql import (
 from ...types import AbstractDirective
 
 
-class ExtendsKwargs(TypedDict):
+class ExtendsDirectiveKwargs(TypedDict):
     ...
 
 
-class ExtendsDirective[ExtendsKwargs](AbstractDirective):
+class ExtendsDirective(AbstractDirective[ExtendsDirectiveKwargs]):
     """Te @extends directive
 
     directive @extends on OBJECT | INTERFACE
@@ -43,7 +43,7 @@ class ExtendsDirective[ExtendsKwargs](AbstractDirective):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ExtendsKwargs) -> DirectiveNode:
+    def Node(cls, **kwargs: ExtendsDirectiveKwargs) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=()

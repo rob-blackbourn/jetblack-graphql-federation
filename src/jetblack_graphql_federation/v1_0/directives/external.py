@@ -11,11 +11,11 @@ from graphql import (
 from ...types import AbstractDirective
 
 
-class ExternalKwargs(TypedDict):
+class ExternalDirectiveKwargs(TypedDict):
     ...
 
 
-class ExternalDirective[ExternalKwargs](AbstractDirective):
+class ExternalDirective(AbstractDirective[ExternalDirectiveKwargs]):
     """The @external directive
 
     directive @external on FIELD_DEFINITION
@@ -36,13 +36,12 @@ class ExternalDirective[ExternalKwargs](AbstractDirective):
         arguments=(),
         repeatable=False,
         locations=(
-            NameNode(value='OBJECT'),
-            NameNode(value='INTERFACE'),
+            NameNode(value='FIELD_DEFINITION'),
         )
     )
 
     @classmethod
-    def Node(cls, **kwargs: ExternalKwargs) -> DirectiveNode:
+    def Node(cls, **kwargs: ExternalDirectiveKwargs) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=()

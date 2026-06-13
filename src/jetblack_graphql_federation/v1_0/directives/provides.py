@@ -14,18 +14,18 @@ from ...types import AbstractDirective
 from ..scalars import FieldSetScalar
 
 
-class ProvidesKwargs(TypedDict):
+class ProvidesDirectiveKwargs(TypedDict):
     ...
 
 
-class ProvidesDirective[ProvidesKwargs](AbstractDirective):
+class ProvidesDirective(AbstractDirective[ProvidesDirectiveKwargs]):
     """The @provides directive
 
     directive @provides(fields: _FieldSet!) on FIELD_DEFINITION
     """
 
     NAME = "provides"
-    ARG_NAME_FIELDS = "fields"
+    ARG_FIELDS = "fields"
 
     Type = GraphQLDirective(
         name=NAME,
@@ -33,7 +33,7 @@ class ProvidesDirective[ProvidesKwargs](AbstractDirective):
             DirectiveLocation.FIELD_DEFINITION,
         ),
         args={
-            ARG_NAME_FIELDS: GraphQLArgument(
+            ARG_FIELDS: GraphQLArgument(
                 GraphQLNonNull(FieldSetScalar.Type)
             )
         },
@@ -50,7 +50,7 @@ class ProvidesDirective[ProvidesKwargs](AbstractDirective):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ProvidesKwargs) -> DirectiveNode:
+    def Node(cls, **kwargs: ProvidesDirectiveKwargs) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=()

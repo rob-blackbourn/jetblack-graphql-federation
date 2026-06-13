@@ -5,20 +5,24 @@ from graphql import (
     StringValueNode
 )
 
+from ...types import AbstractScalar
 
-FIELD_SET_DESCRIPTION = (
-    "A string serialized scalar represent a set of fields that's passes to "
-    "a federated directive, such as @key, @requires, or @provides"
-)
 
-FIELD_SET_NAME = "FieldSet"
+class FieldSetScalar(AbstractScalar):
+    """The FieldSet scalar"""
 
-FieldSet = GraphQLScalarType(
-    name=FIELD_SET_NAME,
-    description=FIELD_SET_DESCRIPTION
-)
+    NAME = "FieldSet"
+    DESCRIPTION = (
+        "A string serialized scalar represent a set of fields that's passes to "
+        "a federated directive, such as @key, @requires, or @provides"
+    )
 
-FieldSetNode = ScalarTypeDefinitionNode(
-    name=NameNode(value=FIELD_SET_NAME),
-    description=StringValueNode(value=FIELD_SET_DESCRIPTION),
-)
+    Type = GraphQLScalarType(
+        name=NAME,
+        description=DESCRIPTION
+    )
+
+    DefinitionNode = ScalarTypeDefinitionNode(
+        name=NameNode(value=NAME),
+        description=StringValueNode(value=DESCRIPTION),
+    )

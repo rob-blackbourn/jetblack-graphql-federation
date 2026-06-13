@@ -1,26 +1,26 @@
 from typing import ClassVar
 
-from ..v1_0 import Federation as v1_0
-
 from .directives import (
-    ExternalDirective,
-    ExternalKwargs,
     InaccessibleDirective,
+    InaccessibleDirectiveKwargs,
     KeyDirective,
-    KeyKwargs,
+    KeyDirectiveKwargs,
     OverrideDirective,
-    ProvidesDirective,
-    RequiresDirective,
+    OverrideDirectiveKwargs,
     ShareableDirective,
-    ShareableKwargs,
-    TagDirective
+    ShareableDirectiveKwargs,
 )
 
-from ..types import AbstractDirective
+from ..v1_1 import Federation as Federation_v1_1
+from ..types import DirectiveType
 
-from .scalars import FieldSet, FieldSetNode
+from .scalars import FieldSetScalar
 
-type KeyDirectiveType = type[AbstractDirective[KeyKwargs]]
+type FieldSetScalarType = type[FieldSetScalar]
+type KeyDirectiveType = DirectiveType[KeyDirectiveKwargs]
+type ShareableDirectiveType = DirectiveType[ShareableDirectiveKwargs]
+type InaccessibleDirectiveType = DirectiveType[InaccessibleDirectiveKwargs]
+type OverrideDirectiveType = DirectiveType[OverrideDirectiveKwargs]
 
 
 class Federation:
@@ -32,20 +32,16 @@ class Federation:
     VERSION = "v2.0"
 
     # Scalars
-    FieldSet = FieldSet
+    FieldSetScalar: ClassVar[FieldSetScalarType] = FieldSetScalar
 
     # Directives
     KeyDirective: ClassVar[KeyDirectiveType] = KeyDirective
-    RequiresDirective = RequiresDirective
-    ProvidesDirective = ProvidesDirective
-    ExternalDirective: type[AbstractDirective[ExternalKwargs]
-                            ] = ExternalDirective
-    ShareableDirective: type[AbstractDirective[ShareableKwargs]
-                             ] = ShareableDirective
-    ExtendsDirective = v1_0.ExtendsDirective
-    OverrideDirective = OverrideDirective
-    InaccessibleDirective = InaccessibleDirective
-    TagDirective = TagDirective
+    ShareableDirective: ClassVar[ShareableDirectiveType] = ShareableDirective
+    InaccessibleDirective: ClassVar[InaccessibleDirectiveType] = InaccessibleDirective
+    OverrideDirective: ClassVar[OverrideDirectiveType] = OverrideDirective
 
-    # Scalar Nodes
-    FieldSetNode = FieldSetNode
+    RequiresDirective = Federation_v1_1.RequiresDirective
+    ProvidesDirective = Federation_v1_1.ProvidesDirective
+    ExternalDirective = Federation_v1_1.ExternalDirective
+    ExtendsDirective = Federation_v1_1.ExtendsDirective
+    TagDirective = Federation_v1_1.TagDirective

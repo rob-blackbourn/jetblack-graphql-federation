@@ -1,9 +1,15 @@
-from ..v2_2 import Federation as _Federation
+from typing import ClassVar
 
-from .directives import InterfaceObjectDirective
+from ..types import DirectiveType
+from ..v2_2 import Federation as Federation_v2_2
+
+from .directives import InterfaceObjectDirective, InterfaceObjectDirectiveKwargs
 
 
-class Federation(_Federation):
+type InterfaceObjectDirectiveType = DirectiveType[InterfaceObjectDirectiveKwargs]
+
+
+class Federation(Federation_v2_2):
     """Federation v2.3
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v23
@@ -11,4 +17,4 @@ class Federation(_Federation):
 
     VERSION = "v2.3"
 
-    InterfaceObjectDirective = InterfaceObjectDirective
+    InterfaceObjectDirective: ClassVar[InterfaceObjectDirectiveType] = InterfaceObjectDirective

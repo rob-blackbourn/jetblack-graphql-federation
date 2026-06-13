@@ -1,7 +1,7 @@
-from ..v2_9 import Federation as _Federation
+from ..v2_9 import Federation as Federation_v2_9
 
 
-class Federation(_Federation):
+class Federation(Federation_v2_9):
     """Federation v2.10
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v210

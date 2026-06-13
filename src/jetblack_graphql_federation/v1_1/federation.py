@@ -1,14 +1,14 @@
 from typing import ClassVar
 
-from ..v1_0 import Federation as v1_0
-from ..types import AbstractDirective
+from ..v1_0 import Federation as Federation_v1_0
+from ..types import DirectiveType
 
-from .directives import TagDirective, TagKwargs
+from .directives import TagDirective, TagDirectiveKwargs
 
-type TagDirectiveType = type[AbstractDirective[TagKwargs]]
+type TagDirectiveType = DirectiveType[TagDirectiveKwargs]
 
 
-class Federation(v1_0):
+class Federation(Federation_v1_0):
     """Federation v1.1
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v11

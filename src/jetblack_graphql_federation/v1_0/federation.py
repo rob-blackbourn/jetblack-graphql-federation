@@ -2,27 +2,27 @@ from typing import ClassVar
 
 from .directives import (
     ExtendsDirective,
-    ExtendsKwargs,
+    ExtendsDirectiveKwargs,
     ExternalDirective,
-    ExternalKwargs,
+    ExternalDirectiveKwargs,
     KeyDirective,
-    KeyKwargs,
+    KeyDirectiveKwargs,
     ProvidesDirective,
-    ProvidesKwargs,
+    ProvidesDirectiveKwargs,
     RequiresDirective,
-    RequiresKwargs,
+    RequiresDirectiveKwargs,
 )
 
-from ..types import AbstractDirective, AbstractScalar
+from ..types import AbstractScalar, DirectiveType
 from .scalars import (
     FieldSetScalar,
 )
 
-type KeyDirectiveType = type[AbstractDirective[KeyKwargs]]
-type RequiresDirectiveType = type[RequiresDirective[RequiresKwargs]]
-type ProvidesDirectiveType = type[ProvidesDirective[ProvidesKwargs]]
-type ExternalDirectiveType = type[ExternalDirective[ExternalKwargs]]
-type ExtendsDirectiveType = type[ExtendsDirective[ExtendsKwargs]]
+type KeyDirectiveType = DirectiveType[KeyDirectiveKwargs]
+type RequiresDirectiveType = DirectiveType[RequiresDirectiveKwargs]
+type ProvidesDirectiveType = DirectiveType[ProvidesDirectiveKwargs]
+type ExternalDirectiveType = DirectiveType[ExternalDirectiveKwargs]
+type ExtendsDirectiveType = DirectiveType[ExtendsDirectiveKwargs]
 
 
 class Federation:
@@ -31,7 +31,7 @@ class Federation:
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v10
     """
 
-    VERSION = "v1.0"
+    VERSION: ClassVar[str] = "v1.0"
 
     # Scalars
     FieldSetScalar: type[AbstractScalar] = FieldSetScalar

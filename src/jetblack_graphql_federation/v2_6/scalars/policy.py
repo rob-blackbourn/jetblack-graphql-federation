@@ -11,6 +11,8 @@ from graphql import (
 )
 from graphql.pyutils import inspect
 
+from ...types import AbstractScalar
+
 
 def _serialize_string(output_value: Any) -> str:
     if isinstance(output_value, str):
@@ -46,19 +48,21 @@ def _parse_string_literal(value_node: ValueNode, _variables: Any = None) -> str:
     return value_node.value
 
 
-_NAME = "federation__Policy"
-_DESCRIPTION = "This string-serialized scalar represents an authorization policy."
+class PolicyScalar(AbstractScalar):
 
-# Reference: https://www.apollographql.com/docs/federation/subgraph-spec/
-Policy = GraphQLScalarType(
-    name=_NAME,
-    description=_DESCRIPTION,
-    serialize=_serialize_string,
-    parse_value=_coerce_string,
-    parse_literal=_parse_string_literal,
-)
+    NAME = "federation__Policy"
+    DESCRIPTION = "This string-serialized scalar represents an authorization policy."
 
-PolicyNode = ScalarTypeDefinitionNode(
-    name=NameNode(value=_NAME),
-    description=StringValueNode(value=_DESCRIPTION),
-)
+    # Reference: https://www.apollographql.com/docs/federation/subgraph-spec/
+    Type = GraphQLScalarType(
+        name=NAME,
+        description=DESCRIPTION,
+        serialize=_serialize_string,
+        parse_value=_coerce_string,
+        parse_literal=_parse_string_literal,
+    )
+
+    DefinitionNode = ScalarTypeDefinitionNode(
+        name=NameNode(value=NAME),
+        description=StringValueNode(value=DESCRIPTION),
+    )

@@ -5,22 +5,27 @@ from graphql import (
     StringValueNode
 )
 
-_NAME = "federation__ContextFieldValue"
-_DESCRIPTION = (
-    "Contains the name of a defined context and a selection of a field "
-    "from the context's type"
-)
-
-# Reference:
-# https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/directives#fromcontext
-# https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/entities/use-contexts
-ContextFieldValue = GraphQLScalarType(
-    name=_NAME,
-    description=_DESCRIPTION,
-)
+from ...types import AbstractScalar
 
 
-FieldSetNode = ScalarTypeDefinitionNode(
-    name=NameNode(value=_NAME),
-    description=StringValueNode(value=_DESCRIPTION),
-)
+class ContextFieldValueScalar[AbstractScalar]:
+    """The federation__ContextFieldValue scalar"""
+
+    NAME = "federation__ContextFieldValue"
+    DESCRIPTION = (
+        "Contains the name of a defined context and a selection of a field "
+        "from the context's type"
+    )
+
+    # Reference:
+    # https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/directives#fromcontext
+    # https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/entities/use-contexts
+    Type = GraphQLScalarType(
+        name=NAME,
+        description=DESCRIPTION,
+    )
+
+    DefinitionNode = ScalarTypeDefinitionNode(
+        name=NameNode(value=NAME),
+        description=StringValueNode(value=DESCRIPTION),
+    )

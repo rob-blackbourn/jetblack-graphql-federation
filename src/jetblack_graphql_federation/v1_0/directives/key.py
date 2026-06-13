@@ -16,14 +16,15 @@ from graphql import (
 )
 
 from ...types import AbstractDirective
+
 from ..scalars import FieldSetScalar
 
 
-class KeyKwargs(TypedDict):
+class KeyDirectiveKwargs(TypedDict):
     fields: Required[str]
 
 
-class KeyDirective[KeyKwargs](AbstractDirective):
+class KeyDirective(AbstractDirective[KeyDirectiveKwargs]):
     """The @key directive
 
     directive @key(fields: _FieldSet!) repeatable on OBJECT | INTERFACE
@@ -67,7 +68,7 @@ class KeyDirective[KeyKwargs](AbstractDirective):
     )
 
     @classmethod
-    def Node(cls, **kwargs: KeyKwargs) -> DirectiveNode:
+    def Node(cls, **kwargs: KeyDirectiveKwargs) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(

@@ -1,18 +1,15 @@
-from .field_set import FieldSet, FieldSetNode
-from .link_import import link_Import, link_ImportNode
-from .link_purpose import link_Purpose, link_PurposeNode
+from .field_set import FieldSetScalar
+from .link_import import LinkImportScalar
+from .link_purpose import LinkPurposeScalar
 
 
 __all__ = [
     # .field_set
-    'FieldSet',
-    'FieldSetNode',
+    'FieldSetScalar',
 
     # .link_import
-    'link_Import',
-    'link_ImportNode',
+    'LinkImportScalar',
 
     # .link_purpose
-    'link_Purpose',
-    'link_PurposeNode',
+    'LinkPurposeScalar',
 ]

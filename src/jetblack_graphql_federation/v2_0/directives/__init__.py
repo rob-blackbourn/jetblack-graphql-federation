@@ -1,39 +1,25 @@
-from .external import ExternalDirective, ExternalKwargs
-from .inaccessible import InaccessibleDirective
-from .key import KeyDirective, KeyKwargs
-from .override import OverrideDirective
-from .provides import ProvidesDirective
-from .requires import RequiresDirective
-from .shareable import ShareableDirective, ShareableKwargs
-from .tag import TagDirective
+from .inaccessible import InaccessibleDirective, InaccessibleDirectiveKwargs
+from .key import KeyDirective, KeyDirectiveKwargs
+from .override import OverrideDirective, OverrideDirectiveKwargs
+from .shareable import ShareableDirective, ShareableDirectiveKwargs
 
 
 __all__ = [
-    # .external
-    'ExternalDirective',
-    'ExternalKwargs',
 
     # .inaccessible
     'InaccessibleDirective',
+    'InaccessibleDirectiveKwargs',
 
     # .key
     'KeyDirective',
-    'KeyKwargs',
+    'KeyDirectiveKwargs',
 
     # .override
     'OverrideDirective',
-
-    # .provides
-    'ProvidesDirective',
-
-    # .requires
-    'RequiresDirective',
+    'OverrideDirectiveKwargs',
 
     # .shareable
     'ShareableDirective',
-    'ShareableKwargs',
-
-    # .tag
-    'TagDirective',
+    'ShareableDirectiveKwargs',
 
 ]

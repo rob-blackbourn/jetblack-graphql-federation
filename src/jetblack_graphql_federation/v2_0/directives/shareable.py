@@ -11,24 +11,29 @@ from graphql import (
 from ...types import AbstractDirective
 
 
-class ShareableKwargs(TypedDict):
+class ShareableDirectiveKwargs(TypedDict):
     ...
 
 
-class ShareableDirective[ShareableKwargs](AbstractDirective):
+class ShareableDirective(AbstractDirective[ShareableDirectiveKwargs]):
+    """The @shareable directive
+
+    directive @shareable on FIELD_DEFINITION | OBJECT
+    """
+
+    NAME = "shareable"
 
     Type = GraphQLDirective(
-        name="shareable",
+        name=NAME,
         locations=(
             DirectiveLocation.FIELD_DEFINITION,
             DirectiveLocation.OBJECT,
         ),
-        description="Federation @shareable directive",
+        description=f"Federation @{NAME} directive",
     )
 
-    # directive @shareable on FIELD_DEFINITION | OBJECT
     DefinitionNode = DirectiveDefinitionNode(
-        name=NameNode(value="shareable"),
+        name=NameNode(value=NAME),
         arguments=(),
         repeatable=False,
         locations=(
@@ -38,8 +43,8 @@ class ShareableDirective[ShareableKwargs](AbstractDirective):
     )
 
     @classmethod
-    def Node(cls, **_kwargs: ShareableKwargs) -> DirectiveNode:  # pylint: disable=arguments-differ
+    def Node(cls, **kwargs: ShareableDirectiveKwargs) -> DirectiveNode:
         return DirectiveNode(
-            name=NameNode(value='shareable'),
+            name=NameNode(value=cls.NAME),
             arguments=(),
         )

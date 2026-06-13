@@ -1,28 +1,28 @@
-from .extends import ExtendsDirective, ExtendsKwargs
-from .external import ExternalDirective, ExternalKwargs
-from .key import KeyDirective, KeyKwargs
-from .provides import ProvidesDirective, ProvidesKwargs
-from .requires import RequiresDirective, RequiresKwargs
+from .extends import ExtendsDirective, ExtendsDirectiveKwargs
+from .external import ExternalDirective, ExternalDirectiveKwargs
+from .key import KeyDirective, KeyDirectiveKwargs
+from .provides import ProvidesDirective, ProvidesDirectiveKwargs
+from .requires import RequiresDirective, RequiresDirectiveKwargs
 
 
 __all__ = [
     # .extends
     'ExtendsDirective',
-    'ExtendsKwargs',
+    'ExtendsDirectiveKwargs',
 
     # .external
     'ExternalDirective',
-    'ExternalKwargs',
+    'ExternalDirectiveKwargs',
 
     # .key
     'KeyDirective',
-    'KeyKwargs',
+    'KeyDirectiveKwargs',
 
     # .provides
     'ProvidesDirective',
-    'ProvidesKwargs',
+    'ProvidesDirectiveKwargs',
 
     # .requires
     'RequiresDirective',
-    'RequiresKwargs',
+    'RequiresDirectiveKwargs',
 ]

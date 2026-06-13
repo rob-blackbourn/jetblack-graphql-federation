@@ -12,6 +12,8 @@ from graphql import (
 from graphql.pyutils import inspect
 from math import isfinite
 
+from ...types import AbstractScalar
+
 
 def _serialize_string(output_value: Any) -> str:
     if isinstance(output_value, str):
@@ -52,24 +54,26 @@ def _parse_string_literal(value_node: ValueNode, _variables: Any = None) -> str:
     return value_node.value
 
 
-_NAME = "link__Import"
-_DESCRIPTION = (
-    "A string serialized scalar specify which directives from an external "
-    "federation specification should be imported into the current schema "
-    "when using @link"
+class LinkImportScalar(AbstractScalar):
+    """The link_Import scalar"""
 
-)
+    NAME = "link__Import"
+    DESCRIPTION = (
+        "A string serialized scalar specify which directives from an external "
+        "federation specification should be imported into the current schema "
+        "when using @link"
 
-link_Import = GraphQLScalarType(
-    name=_NAME,
-    description=_DESCRIPTION,
-    serialize=_serialize_string,
-    parse_value=_coerce_string,
-    parse_literal=_parse_string_literal,
-)
+    )
 
+    Type = GraphQLScalarType(
+        name=NAME,
+        description=DESCRIPTION,
+        serialize=_serialize_string,
+        parse_value=_coerce_string,
+        parse_literal=_parse_string_literal,
+    )
 
-link_ImportNode = ScalarTypeDefinitionNode(
-    name=NameNode(value=_NAME),
-    description=StringValueNode(value=_DESCRIPTION),
-)
+    DefinitionNode = ScalarTypeDefinitionNode(
+        name=NameNode(value=NAME),
+        description=StringValueNode(value=DESCRIPTION),
+    )

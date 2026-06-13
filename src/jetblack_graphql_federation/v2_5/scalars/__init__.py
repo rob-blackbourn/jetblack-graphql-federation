@@ -1,7 +1,6 @@
-from .scope import Scope, ScopeNode
+from .scope import ScopeScalar
 
 __all__ = [
     # .scope
-    'Scope',
-    'ScopeNode',
+    'ScopeScalar',
 ]

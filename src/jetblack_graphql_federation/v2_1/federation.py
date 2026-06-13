@@ -1,9 +1,14 @@
-from ..v2_0 import Federation as _Federation
+from typing import ClassVar
 
-from .directives import ComposeDirective
+from ..types import DirectiveType
+from ..v2_0 import Federation as Federation_v2_0
+
+from .directives import ComposeDirective, ComposeDirectiveKwargs
+
+type ComposeDirectiveType = DirectiveType[ComposeDirectiveKwargs]
 
 
-class Federation(_Federation):
+class Federation(Federation_v2_0):
     """Federation v2.1
 
     See: https://www.apollographql.com/docs/graphos/schema-design/federated-schemas/reference/versions#v21
@@ -11,4 +16,4 @@ class Federation(_Federation):
 
     VERSION = "v2.1"
 
-    ComposeDirective = ComposeDirective
+    ComposeDirective: ClassVar[ComposeDirectiveType] = ComposeDirective
