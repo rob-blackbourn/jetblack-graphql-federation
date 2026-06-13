@@ -1,5 +1,3 @@
-from typing import TypedDict, Required, NotRequired
-
 from graphql import (
     ArgumentNode,
     BooleanValueNode,
@@ -23,17 +21,8 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
 
-
-class ListSizeDirectiveKwargs(TypedDict):
-    assumedSize: Required[int]
-    slicingArguments: Required[str]
-    sizedField: Required[str]
-    requireOneSlicingArgument: NotRequired[bool]
-
-
-class ListSizeDirective(AbstractDirective[ListSizeDirectiveKwargs]):
+class ListSizeDirective:
     """The @listSize directive
 
     directive @listSize(
@@ -107,14 +96,21 @@ class ListSizeDirective(AbstractDirective[ListSizeDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ListSizeDirectiveKwargs) -> DirectiveNode:
+    def Node(
+        cls,
+        assumed_size: int | None,
+        slicing_arguments: list[str] | None,
+        sized_fields: list[str] | None,
+        require_one_slicing_argument: bool | None = True
+
+    ) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_NAME_ASSUMED_SIZE),
                     value=IntValueNode(
-                        value=kwargs[cls.ARG_NAME_ASSUMED_SIZE]
+                        value=str(assumed_size)
                     ),
                 ),
                 ArgumentNode(
@@ -124,7 +120,7 @@ class ListSizeDirective(AbstractDirective[ListSizeDirectiveKwargs]):
                             StringValueNode(
                                 value=value
                             )
-                            for value in kwargs[cls.ARG_NAME_SLICING_ARGUMENTS]
+                            for value in slicing_arguments or []
                         )
                     ),
                 ),
@@ -135,7 +131,7 @@ class ListSizeDirective(AbstractDirective[ListSizeDirectiveKwargs]):
                             StringValueNode(
                                 value=value
                             )
-                            for value in kwargs[cls.ARG_NAME_SIZED_FIELDS]
+                            for value in sized_fields or []
                         )
                     ),
                 ),
@@ -144,7 +140,7 @@ class ListSizeDirective(AbstractDirective[ListSizeDirectiveKwargs]):
                         value=cls.ARG_NAME_REQUIRE_ONE_SLICING_ARGUMENT
                     ),
                     value=BooleanValueNode(
-                        value=kwargs[cls.ARG_NAME_REQUIRE_ONE_SLICING_ARGUMENT]
+                        value=require_one_slicing_argument
                     ),
                 ),
             )

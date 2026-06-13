@@ -1,11 +1,10 @@
 from typing import ClassVar
 
-from ..types import DirectiveType
 from ..v2_6 import Federation as Federation_v2_6
 
-from .directives import OverrideDirective, OverrideDirectiveKwargs
+from .directives import OverrideDirective
 
-type OverrideDirectiveType = DirectiveType[OverrideDirectiveKwargs]
+type OverrideDirectiveType = type[OverrideDirective]
 
 
 class Federation:

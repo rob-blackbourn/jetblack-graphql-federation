@@ -1,5 +1,3 @@
-from typing import Literal, TypedDict, Required
-
 from graphql import (
     ArgumentNode,
     DirectiveDefinitionNode,
@@ -18,16 +16,10 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
-
 from ..scalars import PolicyScalar
 
 
-class PolicyDirectiveKwargs(TypedDict):
-    fields: Required[list[str]]
-
-
-class PolicyDirective(AbstractDirective[PolicyDirectiveKwargs]):
+class PolicyDirective:
     """The @policy directive
 
     directive @policy(policies: [[federation__Policy!]!]!) on
@@ -39,7 +31,7 @@ class PolicyDirective(AbstractDirective[PolicyDirectiveKwargs]):
     """
 
     NAME = "policy"
-    ARG_POLICIES: Literal['policies'] = 'policies'
+    ARG_POLICIES = 'policies'
 
     PolicyDirective = GraphQLDirective(
         name=NAME,
@@ -89,7 +81,7 @@ class PolicyDirective(AbstractDirective[PolicyDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: PolicyDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, policies: list[str]) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
@@ -98,7 +90,7 @@ class PolicyDirective(AbstractDirective[PolicyDirectiveKwargs]):
                     value=ListValueNode(
                         values=tuple(
                             StringValueNode(value=policy)
-                            for policy in kwargs[cls.ARG_POLICIES]
+                            for policy in policies
                         ),
                     ),
                 )

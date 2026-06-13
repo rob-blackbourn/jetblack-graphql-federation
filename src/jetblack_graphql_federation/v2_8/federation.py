@@ -1,19 +1,16 @@
 from typing import ClassVar
 
-from ..types import DirectiveType
 from ..v2_7 import Federation as Federation_v2_7
 
 from .directives import (
     ContextDirective,
-    ContextDirectiveKwargs,
     FromContextDirective,
-    FromContextDirectiveKwargs,
 )
 from .scalars import ContextFieldValueScalar
 
 type ContextFieldValueScalarType = type[ContextFieldValueScalar]
-type ContextDirectiveType = DirectiveType[ContextDirectiveKwargs]
-type FromContextDirectiveType = DirectiveType[FromContextDirectiveKwargs]
+type ContextDirectiveType = type[ContextDirective]
+type FromContextDirectiveType = type[FromContextDirective]
 
 
 class Federation(Federation_v2_7):

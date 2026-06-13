@@ -1,5 +1,3 @@
-from typing import TypedDict
-
 from graphql import (
     ArgumentNode,
     DirectiveDefinitionNode,
@@ -18,16 +16,10 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
-
 from ..scalars import ScopeScalar
 
 
-class RequiresScopesDirectiveKwargs(TypedDict):
-    scopes: list[str]  # type: ignore
-
-
-class RequiresScopesDirective(AbstractDirective[RequiresScopesDirectiveKwargs]):
+class RequiresScopesDirective:
     """The @requiresScopes directive
 
     directive @requiresScopes(scopes: [[federation__Scope!]!]!) on
@@ -87,7 +79,7 @@ class RequiresScopesDirective(AbstractDirective[RequiresScopesDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: RequiresScopesDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, scopes: list[str]) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
@@ -96,7 +88,7 @@ class RequiresScopesDirective(AbstractDirective[RequiresScopesDirectiveKwargs]):
                     value=ListValueNode(
                         values=tuple(
                             StringValueNode(value=scope)
-                            for scope in kwargs[cls.ARG_SCOPES]
+                            for scope in scopes
                         )
                     ),
                 ),

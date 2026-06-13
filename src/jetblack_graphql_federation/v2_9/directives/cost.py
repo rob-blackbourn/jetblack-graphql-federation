@@ -1,5 +1,3 @@
-from typing import TypedDict, Required
-
 from graphql import (
     ArgumentNode,
     DirectiveDefinitionNode,
@@ -16,14 +14,8 @@ from graphql import (
     NonNullTypeNode,
 )
 
-from ...types import AbstractDirective
 
-
-class CostDirectiveKwargs(TypedDict):
-    fields: Required[int]
-
-
-class CostDirective(AbstractDirective[CostDirectiveKwargs]):
+class CostDirective:
     """The @cost directive
 
     directive @cost(weight: Int!) on
@@ -80,13 +72,13 @@ class CostDirective(AbstractDirective[CostDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: CostDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, weight: int) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_WEIGHT),
-                    value=IntValueNode(value=str(kwargs[cls.ARG_WEIGHT])),
+                    value=IntValueNode(value=str(weight)),
                 ),
             )
         )

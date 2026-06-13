@@ -1,5 +1,3 @@
-from typing import TypedDict
-
 from graphql import (
     ArgumentNode,
     DirectiveDefinitionNode,
@@ -16,14 +14,8 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
 
-
-class ComposeDirectiveKwargs(TypedDict):
-    name: str
-
-
-class ComposeDirective(AbstractDirective[ComposeDirectiveKwargs]):
+class ComposeDirective:
     """The @compose directive
 
     directive @composeDirective(name: String!) repeatable on SCHEMA
@@ -60,13 +52,13 @@ class ComposeDirective(AbstractDirective[ComposeDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ComposeDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, name: str) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_NAME),
-                    value=StringValueNode(value=kwargs[cls.ARG_NAME]),
+                    value=StringValueNode(value=name),
                 ),
             )
         )

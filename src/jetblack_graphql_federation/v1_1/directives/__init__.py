@@ -1,8 +1,7 @@
-from .tag import TagDirective, TagDirectiveKwargs
+from .tag import TagDirective
 
 
 __all__ = [
     # .tag
     'TagDirective',
-    'TagDirectiveKwargs',
 ]

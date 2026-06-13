@@ -2,27 +2,22 @@ from typing import ClassVar
 
 from .directives import (
     ExtendsDirective,
-    ExtendsDirectiveKwargs,
     ExternalDirective,
-    ExternalDirectiveKwargs,
     KeyDirective,
-    KeyDirectiveKwargs,
     ProvidesDirective,
-    ProvidesDirectiveKwargs,
     RequiresDirective,
-    RequiresDirectiveKwargs,
 )
 
-from ..types import AbstractScalar, DirectiveType
+from ..types import AbstractScalar
 from .scalars import (
     FieldSetScalar,
 )
 
-type KeyDirectiveType = DirectiveType[KeyDirectiveKwargs]
-type RequiresDirectiveType = DirectiveType[RequiresDirectiveKwargs]
-type ProvidesDirectiveType = DirectiveType[ProvidesDirectiveKwargs]
-type ExternalDirectiveType = DirectiveType[ExternalDirectiveKwargs]
-type ExtendsDirectiveType = DirectiveType[ExtendsDirectiveKwargs]
+type KeyDirectiveType = type[KeyDirective]
+type RequiresDirectiveType = type[RequiresDirective]
+type ProvidesDirectiveType = type[ProvidesDirective]
+type ExternalDirectiveType = type[ExternalDirective]
+type ExtendsDirectiveType = type[ExtendsDirective]
 
 
 class Federation:

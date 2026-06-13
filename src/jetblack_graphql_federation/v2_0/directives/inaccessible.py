@@ -1,5 +1,3 @@
-from typing import TypedDict
-
 from graphql import (
     DirectiveDefinitionNode,
     DirectiveLocation,
@@ -8,14 +6,8 @@ from graphql import (
     NameNode,
 )
 
-from ...types import AbstractDirective
 
-
-class InaccessibleDirectiveKwargs(TypedDict):
-    ...
-
-
-class InaccessibleDirective(AbstractDirective[InaccessibleDirectiveKwargs]):
+class InaccessibleDirective:
     """The @inaccessible directive
 
     directive @inaccessible on
@@ -69,7 +61,7 @@ class InaccessibleDirective(AbstractDirective[InaccessibleDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: InaccessibleDirectiveKwargs) -> DirectiveNode:
+    def Node(cls) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=()

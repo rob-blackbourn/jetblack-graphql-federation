@@ -1,5 +1,3 @@
-from typing import Literal, TypedDict, Required
-
 from graphql import (
     ArgumentNode,
     DirectiveDefinitionNode,
@@ -13,16 +11,10 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
-
 from ..scalars import ContextFieldValueScalar
 
 
-class FromContextDirectiveKwargs(TypedDict):
-    field: Required[str]
-
-
-class FromContextDirective(AbstractDirective[FromContextDirectiveKwargs]):
+class FromContextDirective:
     """The @fromContext directive
 
     scalar ContextFieldValue;
@@ -30,7 +22,7 @@ class FromContextDirective(AbstractDirective[FromContextDirectiveKwargs]):
     """
 
     NAME = 'fromContext'
-    ARG_FIELD: Literal['field'] = 'field'
+    ARG_FIELD = 'field'
 
     Type = GraphQLDirective(
         name=NAME,
@@ -63,13 +55,13 @@ class FromContextDirective(AbstractDirective[FromContextDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: FromContextDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, field: str) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_FIELD),
-                    value=StringValueNode(value=kwargs[cls.ARG_FIELD]),
+                    value=StringValueNode(value=field),
                 ),
             )
         )

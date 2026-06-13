@@ -1,11 +1,10 @@
 from typing import ClassVar
 
-from ..types import DirectiveType
 from ..v2_0 import Federation as Federation_v2_0
 
-from .directives import ComposeDirective, ComposeDirectiveKwargs
+from .directives import ComposeDirective
 
-type ComposeDirectiveType = DirectiveType[ComposeDirectiveKwargs]
+type ComposeDirectiveType = type[ComposeDirective]
 
 
 class Federation(Federation_v2_0):

@@ -1,4 +1,4 @@
-from typing import Required, TypedDict
+from typing import Required, TypedDict, Unpack
 
 from graphql import (
     ArgumentNode,
@@ -15,8 +15,6 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
-
 from ..scalars import FieldSetScalar
 
 
@@ -24,7 +22,7 @@ class RequiresDirectiveKwargs(TypedDict):
     fields: Required[str]
 
 
-class RequiresDirective(AbstractDirective[RequiresDirectiveKwargs]):
+class RequiresDirective:
     """The @requires directive
 
     directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
@@ -66,13 +64,13 @@ class RequiresDirective(AbstractDirective[RequiresDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: RequiresDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, fields: str) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_FIELDS),
-                    value=StringValueNode(value=kwargs[cls.ARG_FIELDS]),
+                    value=StringValueNode(value=fields),
                 ),
             )
         )

@@ -1,5 +1,3 @@
-from typing import TypedDict, Required, NotRequired
-
 from graphql import (
     ArgumentNode,
     BooleanValueNode,
@@ -17,17 +15,10 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
-
 from ..scalars import FieldSetScalar
 
 
-class KeyDirectiveKwargs(TypedDict):
-    fields: Required[str]
-    resolvable: NotRequired[bool]
-
-
-class KeyDirective(AbstractDirective[KeyDirectiveKwargs]):
+class KeyDirective:
     """The @key directive
 
     directive @key(
@@ -88,19 +79,19 @@ class KeyDirective(AbstractDirective[KeyDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: KeyDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, fields: str, resolvable: bool = False) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_FIELDS),
                     value=StringValueNode(
-                        value=kwargs[cls.ARG_FIELDS], block=False),
+                        value=fields, block=False),
                 ),
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_RESOLVABLE),
                     value=BooleanValueNode(
-                        value=kwargs[cls.ARG_RESOLVABLE]
+                        value=resolvable
                     ),
                 ),
             )

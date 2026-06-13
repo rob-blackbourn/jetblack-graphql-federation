@@ -1,5 +1,3 @@
-from typing import TypedDict
-
 from graphql import (
     DirectiveDefinitionNode,
     DirectiveLocation,
@@ -8,14 +6,8 @@ from graphql import (
     NameNode,
 )
 
-from ...types import AbstractDirective
 
-
-class ShareableDirectiveKwargs(TypedDict):
-    ...
-
-
-class ShareableDirective(AbstractDirective[ShareableDirectiveKwargs]):
+class ShareableDirective:
     """The @shareable directive
 
     directive @shareable on FIELD_DEFINITION | OBJECT
@@ -43,7 +35,7 @@ class ShareableDirective(AbstractDirective[ShareableDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ShareableDirectiveKwargs) -> DirectiveNode:
+    def Node(cls) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(),

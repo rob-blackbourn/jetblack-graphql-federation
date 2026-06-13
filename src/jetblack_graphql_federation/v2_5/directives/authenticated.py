@@ -1,5 +1,3 @@
-from typing import TypedDict
-
 from graphql import (
     DirectiveDefinitionNode,
     DirectiveLocation,
@@ -8,14 +6,8 @@ from graphql import (
     NameNode,
 )
 
-from ...types import AbstractDirective
 
-
-class AuthenticatedDirectiveKwargs(TypedDict):
-    ...
-
-
-class AuthenticatedDirective(AbstractDirective[AuthenticatedDirectiveKwargs]):
+class AuthenticatedDirective:
     """The @authenticated directive
 
     directive @authenticated on
@@ -54,7 +46,7 @@ class AuthenticatedDirective(AbstractDirective[AuthenticatedDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **_kwargs: AuthenticatedDirectiveKwargs) -> DirectiveNode:
+    def Node(cls) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(),

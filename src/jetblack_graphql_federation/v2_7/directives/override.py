@@ -1,5 +1,3 @@
-from typing import TypedDict, Required, NotRequired
-
 from graphql import (
     ArgumentNode,
     DirectiveDefinitionNode,
@@ -16,15 +14,8 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
 
-
-class OverrideDirectiveKwargs(TypedDict):
-    from_: Required[str]
-    label: NotRequired[str]
-
-
-class OverrideDirective(AbstractDirective[OverrideDirectiveKwargs]):
+class OverrideDirective:
     """The @override directive
 
     directive @override(from: String!, label: String) on FIELD_DEFINITION
@@ -75,17 +66,17 @@ class OverrideDirective(AbstractDirective[OverrideDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: OverrideDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, from_: str, label: str) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_FROM),
-                    value=StringValueNode(value=kwargs["from_"]),
+                    value=StringValueNode(value=from_),
                 ),
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_LABEL),
-                    value=StringValueNode(value=kwargs.get("label")),
+                    value=StringValueNode(value=label),
                 ),
             )
         )

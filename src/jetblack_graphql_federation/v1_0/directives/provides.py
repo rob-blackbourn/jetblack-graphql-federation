@@ -1,5 +1,3 @@
-from typing import TypedDict
-
 from graphql import (
     DirectiveDefinitionNode,
     DirectiveLocation,
@@ -10,15 +8,10 @@ from graphql import (
     NameNode
 )
 
-from ...types import AbstractDirective
 from ..scalars import FieldSetScalar
 
 
-class ProvidesDirectiveKwargs(TypedDict):
-    ...
-
-
-class ProvidesDirective(AbstractDirective[ProvidesDirectiveKwargs]):
+class ProvidesDirective:
     """The @provides directive
 
     directive @provides(fields: _FieldSet!) on FIELD_DEFINITION
@@ -50,7 +43,7 @@ class ProvidesDirective(AbstractDirective[ProvidesDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ProvidesDirectiveKwargs) -> DirectiveNode:
+    def Node(cls) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=()

@@ -1,5 +1,3 @@
-from typing import TypedDict
-
 from graphql import (
     DirectiveDefinitionNode,
     DirectiveLocation,
@@ -8,14 +6,8 @@ from graphql import (
     NameNode,
 )
 
-from ...types import AbstractDirective
 
-
-class InterfaceObjectDirectiveKwargs(TypedDict):
-    ...
-
-
-class InterfaceObjectDirective(AbstractDirective[InterfaceObjectDirectiveKwargs]):
+class InterfaceObjectDirective:
     """The @interfaceObject directive
 
     directive @interfaceObject on OBJECT
@@ -40,7 +32,7 @@ class InterfaceObjectDirective(AbstractDirective[InterfaceObjectDirectiveKwargs]
     )
 
     @classmethod
-    def Node(cls, **kwargs: InterfaceObjectDirectiveKwargs) -> DirectiveNode:
+    def Node(cls) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(),

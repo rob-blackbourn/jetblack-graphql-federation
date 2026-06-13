@@ -1,8 +1,7 @@
-from .policy import PolicyDirective, PolicyDirectiveKwargs
+from .policy import PolicyDirective
 
 
 __all__ = [
     # .policy
     'PolicyDirective',
-    'PolicyDirectiveKwargs',
 ]

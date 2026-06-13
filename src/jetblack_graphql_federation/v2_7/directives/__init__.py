@@ -1,7 +1,7 @@
-from .override import OverrideDirective, OverrideDirectiveKwargs
+from .override import OverrideDirective
 
 
 __all__ = [
+    # .override
     'OverrideDirective',
-    'OverrideDirectiveKwargs',
 ]

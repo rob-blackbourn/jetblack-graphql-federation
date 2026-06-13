@@ -1,12 +1,11 @@
 from typing import ClassVar
 
-from ..types import DirectiveType
 from ..v2_2 import Federation as Federation_v2_2
 
-from .directives import InterfaceObjectDirective, InterfaceObjectDirectiveKwargs
+from .directives import InterfaceObjectDirective
 
 
-type InterfaceObjectDirectiveType = DirectiveType[InterfaceObjectDirectiveKwargs]
+type InterfaceObjectDirectiveType = type[InterfaceObjectDirective]
 
 
 class Federation(Federation_v2_2):

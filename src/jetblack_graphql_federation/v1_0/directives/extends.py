@@ -1,5 +1,3 @@
-from typing import TypedDict
-
 from graphql import (
     DirectiveDefinitionNode,
     DirectiveLocation,
@@ -8,14 +6,8 @@ from graphql import (
     NameNode,
 )
 
-from ...types import AbstractDirective
 
-
-class ExtendsDirectiveKwargs(TypedDict):
-    ...
-
-
-class ExtendsDirective(AbstractDirective[ExtendsDirectiveKwargs]):
+class ExtendsDirective:
     """Te @extends directive
 
     directive @extends on OBJECT | INTERFACE
@@ -43,7 +35,7 @@ class ExtendsDirective(AbstractDirective[ExtendsDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ExtendsDirectiveKwargs) -> DirectiveNode:
+    def Node(cls) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=()

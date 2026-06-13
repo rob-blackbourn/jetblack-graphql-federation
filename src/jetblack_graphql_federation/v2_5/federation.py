@@ -1,19 +1,16 @@
 from typing import ClassVar
 
-from ..types import DirectiveType
 from ..v2_4 import Federation as Federation_v2_4
 
 from .directives import (
     AuthenticatedDirective,
-    AuthenticatedDirectiveKwargs,
     RequiresScopesDirective,
-    RequiresScopesDirectiveKwargs
 )
 from .scalars import ScopeScalar
 
 type ScopeScalarType = type[ScopeScalar]
-type AuthenticatedDirectiveType = DirectiveType[AuthenticatedDirectiveKwargs]
-type RequiresScopesDirectiveType = DirectiveType[RequiresScopesDirectiveKwargs]
+type AuthenticatedDirectiveType = type[AuthenticatedDirective]
+type RequiresScopesDirectiveType = type[RequiresScopesDirective]
 
 
 class Federation(Federation_v2_4):

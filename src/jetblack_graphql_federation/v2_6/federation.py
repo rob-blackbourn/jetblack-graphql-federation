@@ -1,14 +1,13 @@
 from typing import ClassVar
 
-from ..types import DirectiveType
 from ..v2_5 import Federation as Federation_v2_5
 
-from .directives import PolicyDirective, PolicyDirectiveKwargs
+from .directives import PolicyDirective
 from .scalars import PolicyScalar
 
 
 type PolicyScalarType = type[PolicyScalar]
-type PolicyDirectiveType = DirectiveType[PolicyDirectiveKwargs]
+type PolicyDirectiveType = type[PolicyDirective]
 
 
 class Federation(Federation_v2_5):

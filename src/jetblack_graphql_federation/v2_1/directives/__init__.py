@@ -1,8 +1,7 @@
-from .compose import ComposeDirective, ComposeDirectiveKwargs
+from .compose import ComposeDirective
 
 
 __all__ = [
     # .compose
     'ComposeDirective',
-    'ComposeDirectiveKwargs',
 ]

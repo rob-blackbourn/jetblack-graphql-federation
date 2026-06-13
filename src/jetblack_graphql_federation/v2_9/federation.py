@@ -1,17 +1,14 @@
 from typing import ClassVar
 
-from ..types import DirectiveType
 from ..v2_8 import Federation as Federation_v2_8
 
 from .directives import (
     ListSizeDirective,
-    ListSizeDirectiveKwargs,
     CostDirective,
-    CostDirectiveKwargs,
 )
 
-type ListSizeDirectiveType = DirectiveType[ListSizeDirectiveKwargs]
-type CostDirectiveType = DirectiveType[CostDirectiveKwargs]
+type ListSizeDirectiveType = type[ListSizeDirective]
+type CostDirectiveType = type[CostDirective]
 
 
 class Federation(Federation_v2_8):

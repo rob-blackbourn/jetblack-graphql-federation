@@ -1,6 +1,11 @@
+from typing import ClassVar
+
 from .directives import ShareableDirective
 
 from ..v2_1 import Federation as Federation_v2_1
+
+
+type ShareableDirectiveType = type[ShareableDirective]
 
 
 class Federation(Federation_v2_1):
@@ -11,4 +16,4 @@ class Federation(Federation_v2_1):
 
     VERSION = "v2.2"
 
-    ShareableDirective = ShareableDirective
+    ShareableDirective: ClassVar[ShareableDirectiveType] = ShareableDirective

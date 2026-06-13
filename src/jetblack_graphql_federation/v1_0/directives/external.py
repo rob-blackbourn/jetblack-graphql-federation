@@ -1,5 +1,3 @@
-from typing import TypedDict
-
 from graphql import (
     DirectiveDefinitionNode,
     DirectiveLocation,
@@ -8,14 +6,8 @@ from graphql import (
     NameNode,
 )
 
-from ...types import AbstractDirective
 
-
-class ExternalDirectiveKwargs(TypedDict):
-    ...
-
-
-class ExternalDirective(AbstractDirective[ExternalDirectiveKwargs]):
+class ExternalDirective:
     """The @external directive
 
     directive @external on FIELD_DEFINITION
@@ -41,7 +33,7 @@ class ExternalDirective(AbstractDirective[ExternalDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ExternalDirectiveKwargs) -> DirectiveNode:
+    def Node(cls) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=()

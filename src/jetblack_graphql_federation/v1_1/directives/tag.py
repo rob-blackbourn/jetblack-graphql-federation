@@ -1,5 +1,3 @@
-from typing import Required, TypedDict
-
 from graphql import (
     ArgumentNode,
     DirectiveDefinitionNode,
@@ -16,14 +14,8 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
 
-
-class TagDirectiveKwargs(TypedDict):
-    name: Required[str]
-
-
-class TagDirective(AbstractDirective[TagDirectiveKwargs]):
+class TagDirective:
     """The @tag directive
 
     directive @tag(name: String!) repeatable on
@@ -76,13 +68,13 @@ class TagDirective(AbstractDirective[TagDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: TagDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, name: str) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_NAME),
-                    value=StringValueNode(value=kwargs[cls.ARG_NAME]),
+                    value=StringValueNode(value=name),
                 ),
             )
         )

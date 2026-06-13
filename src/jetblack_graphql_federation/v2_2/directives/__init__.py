@@ -1,8 +1,7 @@
-from .shareable import ShareableDirective, ShareableDirectiveKwargs
+from .shareable import ShareableDirective
 
 
 __all__ = [
     # .shareable
     'ShareableDirective',
-    'ShareableDirectiveKwargs',
 ]

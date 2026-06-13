@@ -1,11 +1,10 @@
 from typing import ClassVar
 
 from ..v1_0 import Federation as Federation_v1_0
-from ..types import DirectiveType
 
-from .directives import TagDirective, TagDirectiveKwargs
+from .directives import TagDirective
 
-type TagDirectiveType = DirectiveType[TagDirectiveKwargs]
+type TagDirectiveType = type[TagDirective]
 
 
 class Federation(Federation_v1_0):

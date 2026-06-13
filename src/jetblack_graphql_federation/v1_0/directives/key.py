@@ -1,5 +1,3 @@
-from typing import TypedDict, Required
-
 from graphql import (
     ArgumentNode,
     DirectiveDefinitionNode,
@@ -15,23 +13,17 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
-
 from ..scalars import FieldSetScalar
 
 
-class KeyDirectiveKwargs(TypedDict):
-    fields: Required[str]
-
-
-class KeyDirective(AbstractDirective[KeyDirectiveKwargs]):
+class KeyDirective:
     """The @key directive
 
     directive @key(fields: _FieldSet!) repeatable on OBJECT | INTERFACE
     """
 
     NAME = "key"
-    ARG_NAME_FIELDS = "fields"
+    ARG_FIELDS = "fields"
 
     Type = GraphQLDirective(
         name=NAME,
@@ -39,7 +31,7 @@ class KeyDirective(AbstractDirective[KeyDirectiveKwargs]):
             DirectiveLocation.OBJECT,
             DirectiveLocation.INTERFACE,
         ),
-        args={ARG_NAME_FIELDS: GraphQLArgument(
+        args={ARG_FIELDS: GraphQLArgument(
             GraphQLNonNull(FieldSetScalar.Type))},
         description=f"Federation @{NAME} directive",
         is_repeatable=True,
@@ -49,7 +41,7 @@ class KeyDirective(AbstractDirective[KeyDirectiveKwargs]):
         name=NameNode(value=NAME),
         arguments=(
             InputValueDefinitionNode(
-                name=NameNode(value=ARG_NAME_FIELDS),
+                name=NameNode(value=ARG_FIELDS),
                 type=NonNullTypeNode(
                     type=NamedTypeNode(
                         name=NameNode(
@@ -68,13 +60,13 @@ class KeyDirective(AbstractDirective[KeyDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: KeyDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, fields: str) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
-                    name=NameNode(value=cls.ARG_NAME_FIELDS),
-                    value=StringValueNode(value=kwargs[cls.ARG_NAME_FIELDS]),
+                    name=NameNode(value=cls.ARG_FIELDS),
+                    value=StringValueNode(value=fields),
                 ),
             )
         )

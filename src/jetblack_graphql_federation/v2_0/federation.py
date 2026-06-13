@@ -2,25 +2,20 @@ from typing import ClassVar
 
 from .directives import (
     InaccessibleDirective,
-    InaccessibleDirectiveKwargs,
     KeyDirective,
-    KeyDirectiveKwargs,
     OverrideDirective,
-    OverrideDirectiveKwargs,
     ShareableDirective,
-    ShareableDirectiveKwargs,
 )
 
 from ..v1_1 import Federation as Federation_v1_1
-from ..types import DirectiveType
 
 from .scalars import FieldSetScalar
 
 type FieldSetScalarType = type[FieldSetScalar]
-type KeyDirectiveType = DirectiveType[KeyDirectiveKwargs]
-type ShareableDirectiveType = DirectiveType[ShareableDirectiveKwargs]
-type InaccessibleDirectiveType = DirectiveType[InaccessibleDirectiveKwargs]
-type OverrideDirectiveType = DirectiveType[OverrideDirectiveKwargs]
+type KeyDirectiveType = type[KeyDirective]
+type ShareableDirectiveType = type[ShareableDirective]
+type InaccessibleDirectiveType = type[InaccessibleDirective]
+type OverrideDirectiveType = type[OverrideDirective]
 
 
 class Federation:

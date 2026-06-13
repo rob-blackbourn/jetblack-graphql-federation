@@ -6,11 +6,8 @@ from graphql import (
     NameNode,
 )
 
-from ...types import AbstractDirective
-from ...v2_0.directives import ShareableDirectiveKwargs
 
-
-class ShareableDirective(AbstractDirective[ShareableDirectiveKwargs]):
+class ShareableDirective:
     """The @shareable directive
 
     ## Directive changes
@@ -46,7 +43,7 @@ class ShareableDirective(AbstractDirective[ShareableDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ShareableDirectiveKwargs) -> DirectiveNode:
+    def Node(cls) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(),

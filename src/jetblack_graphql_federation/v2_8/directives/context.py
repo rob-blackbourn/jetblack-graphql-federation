@@ -1,5 +1,3 @@
-from typing import Literal, Required, TypedDict
-
 from graphql import (
     ArgumentNode,
     DirectiveDefinitionNode,
@@ -16,21 +14,15 @@ from graphql import (
     StringValueNode,
 )
 
-from ...types import AbstractDirective
 
-
-class ContextDirectiveKwargs(TypedDict):
-    name: Required[str]
-
-
-class ContextDirective(AbstractDirective[ContextDirectiveKwargs]):
+class ContextDirective:
     """The @context directive
 
     directive @context(name: String!) on OBJECT | INTERFACE | UNION;
     """
 
     NAME = "context"
-    ARG_NAME: Literal['name'] = 'name'
+    ARG_NAME = 'name'
 
     Type = GraphQLDirective(
         name=NAME,
@@ -68,13 +60,13 @@ class ContextDirective(AbstractDirective[ContextDirectiveKwargs]):
     )
 
     @classmethod
-    def Node(cls, **kwargs: ContextDirectiveKwargs) -> DirectiveNode:
+    def Node(cls, name: str) -> DirectiveNode:
         return DirectiveNode(
             name=NameNode(value=cls.NAME),
             arguments=(
                 ArgumentNode(
                     name=NameNode(value=cls.ARG_NAME),
-                    value=StringValueNode(value=kwargs[cls.ARG_NAME]),
+                    value=StringValueNode(value=name),
                 ),
             )
         )

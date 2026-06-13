@@ -1,25 +1,21 @@
-from .inaccessible import InaccessibleDirective, InaccessibleDirectiveKwargs
-from .key import KeyDirective, KeyDirectiveKwargs
-from .override import OverrideDirective, OverrideDirectiveKwargs
-from .shareable import ShareableDirective, ShareableDirectiveKwargs
+from .inaccessible import InaccessibleDirective
+from .key import KeyDirective
+from .override import OverrideDirective
+from .shareable import ShareableDirective
 
 
 __all__ = [
 
     # .inaccessible
     'InaccessibleDirective',
-    'InaccessibleDirectiveKwargs',
 
     # .key
     'KeyDirective',
-    'KeyDirectiveKwargs',
 
     # .override
     'OverrideDirective',
-    'OverrideDirectiveKwargs',
 
     # .shareable
     'ShareableDirective',
-    'ShareableDirectiveKwargs',
 
 ]

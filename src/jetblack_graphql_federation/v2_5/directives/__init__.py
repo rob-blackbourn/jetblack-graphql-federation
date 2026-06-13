@@ -1,13 +1,11 @@
-from .authenticated import AuthenticatedDirective, AuthenticatedDirectiveKwargs
-from .requires_scope import RequiresScopesDirective, RequiresScopesDirectiveKwargs
+from .authenticated import AuthenticatedDirective
+from .requires_scope import RequiresScopesDirective
 
 
 __all__ = [
     # .authenticated
     'AuthenticatedDirective',
-    'AuthenticatedDirectiveKwargs',
 
     # .requires_scope
     'RequiresScopesDirective',
-    'RequiresScopesDirectiveKwargs',
 ]
